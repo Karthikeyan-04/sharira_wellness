@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest-dark: #1a2a1a;
+  --color-forest: #1c451c;
+  --color-sage: #536C46;
+  --color-cream: #F5F0E8;
+  --color-gold: #c5a059;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Jost", sans-serif;
+  --font-sans: "Jost", sans-serif; /* Override default sans */
+}
+
+@layer base {
+  body {
+    background-color: var(--color-cream);
+    color: #333;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
