@@ -40,7 +40,7 @@ const BookingConfirmed: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link to="/" className="flex items-center justify-center gap-2 bg-forest-dark text-white py-4 rounded-2xl font-bold hover:bg-forest transition-all shadow-lg active:scale-95">
             <Home className="w-5 h-5" />
-            Back to Home
+            Back to Index
           </Link>
           <Link to="/bookings" className="flex items-center justify-center gap-2 bg-white text-forest-dark border border-gray-100 py-4 rounded-2xl font-bold hover:bg-gray-50 transition-all active:scale-95">
             <Calendar className="w-5 h-5" />

@@ -52,12 +52,12 @@ const AyurvedaResults: React.FC = () => {
           <ArrowLeft className="w-5 h-5 text-forest-dark" />
         </Link>
         <div className="flex-1 relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input 
-            type="text" 
-            placeholder="Search Ayurveda in Chennai..." 
-            className="w-full pl-12 pr-4 py-3 bg-white rounded-2xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-sage/20 text-forest-dark"
+          <input
+            type="text"
+            placeholder="Search Ayurveda in Chennai..."
+            className="w-full pl-4 pr-12 py-3 bg-white rounded-2xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-sage/20 text-forest-dark"
           />
+          <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
         </div>
         <button className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm hover:bg-gray-50 border border-gray-100 shrink-0">
           <SlidersHorizontal className="w-5 h-5 text-forest-dark" />
@@ -73,32 +73,32 @@ const AyurvedaResults: React.FC = () => {
 
       {/* Results List */}
       <div className="space-y-6">
-        <ResultCard 
-          title="Kottakal Ayurveda Centre" 
-          location="Anna Nagar" 
-          distance="2.1 km" 
-          rating="4.9" 
+        <ResultCard
+          title="Kottakal Ayurveda Centre"
+          location="Anna Nagar"
+          distance="2.1 km"
+          rating="4.9"
           reviews="128"
         />
-        <ResultCard 
-          title="Serenity Wellness Spa" 
-          location="T.Nagar" 
-          distance="3.5 km" 
-          rating="4.8" 
+        <ResultCard
+          title="Serenity Wellness Spa"
+          location="T.Nagar"
+          distance="3.5 km"
+          rating="4.8"
           reviews="94"
         />
-        <ResultCard 
-          title="Glow Aesthetics Clinic" 
-          location="Nungambakkam" 
-          distance="4.2 km" 
-          rating="4.7" 
+        <ResultCard
+          title="Glow Aesthetics Clinic"
+          location="Nungambakkam"
+          distance="4.2 km"
+          rating="4.7"
           reviews="210"
         />
-        <ResultCard 
-          title="ZenYoga & Wellness" 
-          location="Mylapore" 
-          distance="5.8 km" 
-          rating="4.9" 
+        <ResultCard
+          title="ZenYoga & Wellness"
+          location="Mylapore"
+          distance="5.8 km"
+          rating="4.9"
           reviews="156"
         />
       </div>

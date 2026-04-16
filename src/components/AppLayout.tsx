@@ -18,7 +18,10 @@ const SidebarItem = ({ to, icon: Icon, label }: { to: string; icon: any; label: 
   </NavLink>
 );
 
-const DesktopSidebar = () => (
+const DesktopSidebar = () => {
+  const navigate = useNavigate();
+
+  return (
   <aside className="fixed top-0 left-0 hidden w-60 h-screen bg-forest-dark lg:flex flex-col py-8 z-50">
     <div className="px-6 mb-10">
       <h1 className="font-display text-4xl text-white">Sharira</h1>
@@ -26,7 +29,7 @@ const DesktopSidebar = () => (
     </div>
     
     <nav className="flex-1 space-y-1">
-      <SidebarItem to="/" icon={Home} label="Home" />
+      <SidebarItem to="/" icon={Home} label="Index" />
       <SidebarItem to="/explore" icon={Compass} label="Explore" />
       <SidebarItem to="/bookings" icon={Calendar} label="Bookings" />
       <SidebarItem to="/chat" icon={MessageSquare} label="Chat" />
@@ -46,7 +49,7 @@ const DesktopSidebar = () => (
         className="flex items-center gap-3 text-sm font-medium text-white/70 hover:text-white transition-colors w-full px-2"
         onClick={() => {
           localStorage.removeItem('hasOnboarded');
-          window.location.href = '/onboarding/login';
+          navigate('/onboarding/login');
         }}
       >
         <LogOut className="w-4 h-4 rotate-180" />
@@ -54,13 +57,14 @@ const DesktopSidebar = () => (
       </button>
     </div>
   </aside>
-);
+  );
+};
 
 const BottomNav = () => (
   <nav className="fixed bottom-0 left-0 right-0 h-[68px] bg-white border-t border-gray-100 flex items-center justify-around px-4 lg:hidden z-50">
     <NavLink to="/" className={({ isActive }) => `flex flex-col items-center gap-1 ${isActive ? 'text-sage' : 'text-gray-400'}`}>
       <Home className="w-6 h-6" />
-      <span className="text-[10px] font-medium">Home</span>
+      <span className="text-[10px] font-medium">Index</span>
     </NavLink>
     <NavLink to="/explore" className={({ isActive }) => `flex flex-col items-center gap-1 ${isActive ? 'text-sage' : 'text-gray-400'}`}>
       <Compass className="w-6 h-6" />

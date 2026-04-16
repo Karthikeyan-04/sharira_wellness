@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowLeft, Bell, Lock, Eye, Globe, Moon, CreditCard, User, HelpCircle, ChevronRight, LogOut, ShieldCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SettingItem = ({ icon: Icon, title, sub, hasToggle, hasArrow }: any) => (
   <div className="flex items-center justify-between p-6 bg-white rounded-3xl border border-gray-100 hover:border-sage/20 transition-all cursor-pointer group">
@@ -25,6 +25,13 @@ const SettingItem = ({ icon: Icon, title, sub, hasToggle, hasArrow }: any) => (
 );
 
 const Settings: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('hasOnboarded');
+    navigate('/onboarding/login');
+  };
+
   return (
     <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10 pb-20">
       {/* Header */}
@@ -61,7 +68,10 @@ const Settings: React.FC = () => {
 
       {/* Danger Zone */}
       <div className="pt-10 border-t border-gray-100 flex flex-col items-center space-y-6">
-         <button className="flex items-center gap-2 text-red-500 font-bold text-sm hover:underline">
+         <button 
+           onClick={handleLogout}
+           className="flex items-center gap-2 text-red-500 font-bold text-sm hover:underline"
+         >
            <LogOut className="w-4 h-4" />
            Logout from Sharira
          </button>

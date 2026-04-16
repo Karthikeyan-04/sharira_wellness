@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, Shield, Award, History, Heart, Star, ChevronRight, LogOut, Settings, Bell, FileText, Gift } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProfileStat = ({ label, value }: { label: string; value: string }) => (
   <div className="bg-white p-6 rounded-3xl border border-gray-100 flex flex-col items-center text-center">
@@ -25,6 +25,8 @@ const ProfileLink = ({ icon: Icon, title, to, badge }: { icon: any; title: strin
 );
 
 const Profile: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
       {/* Profile Header */}
@@ -53,7 +55,7 @@ const Profile: React.FC = () => {
               className="text-xs font-bold text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1"
               onClick={() => {
                 localStorage.removeItem('hasOnboarded');
-                window.location.href = '/onboarding/login';
+                navigate('/onboarding/login');
               }}
             >
               <LogOut className="w-3 h-3" />

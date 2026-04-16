@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppLayout from './components/AppLayout';
-import Home from './pages/Home';
+import Index from './pages/Index';
 import Explore from './pages/Explore';
 import Categories from './pages/Categories';
 import AyurvedaResults from './pages/AyurvedaResults';
@@ -28,7 +28,7 @@ import OnboardingFlow from './pages/onboarding/OnboardingFlow';
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.DEV ? '/' : '/sharira'}>
       <Routes>
         {/* Onboarding Flow (Full screen) */}
         <Route path="/onboarding/login" element={<Login />} />
@@ -37,7 +37,7 @@ function App() {
         
         {/* Main App Dashboard (at root for link compatibility) */}
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Index />} />
           <Route path="explore" element={<Explore />} />
           <Route path="categories" element={<Categories />} />
           <Route path="ayurveda-results" element={<AyurvedaResults />} />

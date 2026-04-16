@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, MapPin, Star, Filter, Heart } from 'lucide-react';
+import { Search, MapPin, Star, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ExploreCard = ({ title, location, distance, price, rating, category }: any) => (
@@ -40,22 +40,18 @@ const Explore: React.FC = () => {
   return (
     <div className="p-4 sm:p-6 lg:p-10 max-w-7xl mx-auto space-y-8">
       {/* Search & Filter Header */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-[32px] shadow-sm border border-gray-100">
-        <div className="relative flex-1 w-full">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input 
-            type="text" 
-            placeholder="Search for Ayurveda, Yoga, or Spa..." 
-            className="w-full pl-12 pr-4 py-3 bg-cream/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sage/20 text-forest-dark font-medium"
+      <div className="flex gap-3 items-center bg-white p-3 rounded-[32px] shadow-sm border border-gray-100 overflow-x-auto scrollbar-hide snap-x">
+        <div className="relative shrink-0 w-[280px] md:flex-1 md:w-auto snap-start">
+
+          <input
+            type="text"
+            placeholder="Search for Ayurveda, Yoga, or Spa..."
+            className="w-full pl-2 pr-4 py-3 bg-cream/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sage/20 text-forest-dark font-medium"
           />
         </div>
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <button className="flex items-center gap-2 px-6 py-3 bg-cream/30 rounded-2xl text-forest-dark font-bold hover:bg-cream/50 transition-all">
-            <MapPin className="w-5 h-5" />
-            <span>Chennai</span>
-          </button>
+        <div className="flex items-center gap-2 shrink-0 snap-start">
           <button className="flex items-center justify-center w-12 h-12 bg-forest-dark text-white rounded-2xl hover:bg-forest transition-all shadow-lg">
-            <Filter className="w-5 h-5" />
+            <Search className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -70,52 +66,52 @@ const Explore: React.FC = () => {
 
       {/* Results Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <ExploreCard 
-          title="Veda Ayurvedic Spa" 
-          location="Anna Nagar" 
-          distance="2.1 km" 
-          price="2,400" 
-          rating="4.9" 
+        <ExploreCard
+          title="Veda Ayurvedic Spa"
+          location="Anna Nagar"
+          distance="2.1 km"
+          price="2,400"
+          rating="4.9"
           category="Ayurveda"
         />
-        <ExploreCard 
-          title="Serene Yoga Studio" 
-          location="Nungambakkam" 
-          distance="4.5 km" 
-          price="800" 
-          rating="4.8" 
+        <ExploreCard
+          title="Serene Yoga Studio"
+          location="Nungambakkam"
+          distance="4.5 km"
+          price="800"
+          rating="4.8"
           category="Yoga"
         />
-        <ExploreCard 
-          title="Prana Wellness Center" 
-          location="Adyar" 
-          distance="6.8 km" 
-          price="3,500" 
-          rating="4.7" 
+        <ExploreCard
+          title="Prana Wellness Center"
+          location="Adyar"
+          distance="6.8 km"
+          price="3,500"
+          rating="4.7"
           category="Massage"
         />
-        <ExploreCard 
-          title="Lotus Skin Sanctuary" 
-          location="T.Nagar" 
-          distance="3.2 km" 
-          price="1,800" 
-          rating="4.6" 
+        <ExploreCard
+          title="Lotus Skin Sanctuary"
+          location="T.Nagar"
+          distance="3.2 km"
+          price="1,800"
+          rating="4.6"
           category="Healing"
         />
-        <ExploreCard 
-          title="Zenith Float Clinic" 
-          location="Besant Nagar" 
-          distance="5.4 km" 
-          price="2,800" 
-          rating="4.9" 
+        <ExploreCard
+          title="Zenith Float Clinic"
+          location="Besant Nagar"
+          distance="5.4 km"
+          price="2,800"
+          rating="4.9"
           category="Wellness"
         />
-        <ExploreCard 
-          title="Healing Hands" 
-          location="Velachery" 
-          distance="1.2 km" 
-          price="1,500" 
-          rating="4.5" 
+        <ExploreCard
+          title="Healing Hands"
+          location="Velachery"
+          distance="1.2 km"
+          price="1,500"
+          rating="4.5"
           category="Massage"
         />
       </div>

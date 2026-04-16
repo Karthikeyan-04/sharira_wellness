@@ -42,7 +42,7 @@ const Login: React.FC = () => {
       {/* Header */}
       <header className="ob-header">
         <div className="ob-logo-container">
-          <img src="/images/icons/logo2.png" className="ob-logo" alt="Sarira Logo" />
+          <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} className="ob-logo" alt="Sarira Logo" />
         </div>
         
         {activeTab === 'register' && (

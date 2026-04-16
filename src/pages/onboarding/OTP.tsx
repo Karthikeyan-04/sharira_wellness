@@ -90,7 +90,7 @@ const OTP: React.FC = () => {
           ←
         </button>
         <div className="ob-logo-container">
-          <img src="/images/icons/logo2.png" className="ob-logo" alt="Sarira Logo" />
+          <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} className="ob-logo" alt="Sarira Logo" />
         </div>
         <h1 className="ob-welcome-text">Verify Code</h1>
         <p className="ob-step-info">Enter the code sent to your registered contact</p>
@@ -100,7 +100,7 @@ const OTP: React.FC = () => {
         {/* Icon ring */}
         <div className="ob-otp-icon-ring">
           <div className="ob-otp-ring-inner">
-            <img src="/images/icons/icon.png" alt="Sarira" style={{ width: '90%' }} />
+            <img src={`${import.meta.env.BASE_URL}images/icons/icon.png`} alt="Sarira" style={{ width: '90%' }} />
           </div>
         </div>
 

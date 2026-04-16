@@ -83,7 +83,7 @@ const OnboardingFlow: React.FC = () => {
     setNoneSelected(true);
   };
 
-  const toggleTag = (tag: string, list: string[], setList: React.Dispatch<React.SetStateAction<string[]>>) => {
+  const toggleTag = (tag: string, setList: React.Dispatch<React.SetStateAction<string[]>>) => {
     setList(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
   };
 
@@ -108,7 +108,7 @@ const OnboardingFlow: React.FC = () => {
       <div className="onboarding-wrapper" style={{ justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ textAlign: 'center', padding: '40px 20px', maxWidth: '600px' }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
-            <img src="/images/icons/logo2.png" style={{ width: '200px' }} alt="Sarira" />
+            <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} style={{ width: '200px' }} alt="Sarira" />
           </div>
           <h2 className="ob-success-title">You're all set!</h2>
           <p className="ob-success-desc">
@@ -142,7 +142,7 @@ const OnboardingFlow: React.FC = () => {
           <ArrowLeft size={24} strokeWidth={3} color="white" />
         </button>
         <div className="ob-logo-container">
-          <img src="/images/icons/logo2.png" className="ob-logo" alt="Sarira Logo" />
+          <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} className="ob-logo" alt="Sarira Logo" />
         </div>
         <h1 className="ob-welcome-text">{STEP_TITLES[currentStep]}</h1>
         <p className="ob-step-info">Step {currentStep} of {totalSteps}</p>
@@ -317,7 +317,7 @@ const OnboardingFlow: React.FC = () => {
                   <div
                     key={tag}
                     className={`ob-pill-tag ${selectedTreatments.includes(tag) ? 'selected' : ''}`}
-                    onClick={() => toggleTag(tag, selectedTreatments, setSelectedTreatments)}
+                    onClick={() => toggleTag(tag, setSelectedTreatments)}
                     role="button"
                     tabIndex={0}
                   >
@@ -334,7 +334,7 @@ const OnboardingFlow: React.FC = () => {
                   <div
                     key={tag}
                     className={`ob-pill-tag ${selectedCentres.includes(tag) ? 'selected' : ''}`}
-                    onClick={() => toggleTag(tag, selectedCentres, setSelectedCentres)}
+                    onClick={() => toggleTag(tag, setSelectedCentres)}
                     role="button"
                     tabIndex={0}
                   >
