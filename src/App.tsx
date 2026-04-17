@@ -28,7 +28,7 @@ import OnboardingFlow from './pages/onboarding/OnboardingFlow';
 
 function App() {
   return (
-    <Router basename={import.meta.env.DEV ? '/' : '/sharira'}>
+    <Router basename="/">
       <Routes>
         {/* Onboarding Flow (Full screen) */}
         <Route path="/onboarding/login" element={<Login />} />
