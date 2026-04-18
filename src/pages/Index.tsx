@@ -14,7 +14,7 @@ const CategoryCard = ({ emoji, label, to }: { emoji: string; label: string; to: 
 const WellnessCard = ({ title, sub, rating }: { title: string; sub: string; rating: string }) => (
   <Link to="/vendor-profile" className="min-w-[240px] bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow shrink-0">
     <div className="h-32 bg-gray-200 relative">
-      <img src={`https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`} alt={title} className="w-full h-full object-cover" />
+      <img src={`https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`} alt={title} className="w-full h-full object-cover" loading="lazy" />
       <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
         <Star className="w-3 h-3 text-gold fill-gold" />
         <span className="text-xs font-bold">{rating}</span>

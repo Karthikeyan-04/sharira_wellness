@@ -108,7 +108,7 @@ const OnboardingFlow: React.FC = () => {
       <div className="onboarding-wrapper" style={{ justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ textAlign: 'center', padding: '40px 20px', maxWidth: '600px' }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
-            <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} style={{ width: '200px' }} alt="Sarira" />
+            <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} style={{ width: '200px' }} alt="Sarira" loading="lazy" />
           </div>
           <h2 className="ob-success-title">You're all set!</h2>
           <p className="ob-success-desc">
@@ -142,7 +142,7 @@ const OnboardingFlow: React.FC = () => {
           <ArrowLeft size={24} strokeWidth={3} color="white" />
         </button>
         <div className="ob-logo-container">
-          <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} className="ob-logo" alt="Sarira Logo" />
+          <img src={`${import.meta.env.BASE_URL}images/icons/logo2.png`} className="ob-logo" alt="Sarira Logo" loading="lazy" />
         </div>
         <h1 className="ob-welcome-text">{STEP_TITLES[currentStep]}</h1>
         <p className="ob-step-info">Step {currentStep} of {totalSteps}</p>
