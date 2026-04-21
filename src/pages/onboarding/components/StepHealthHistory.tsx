@@ -1,15 +1,7 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
-
-const HEALTH_CONDITIONS = [
-  { icon: '🦴', title: 'Arthritis / Joint Pain', desc: 'Stiffness, swelling, chronic ache' },
-  { icon: '❤️', title: 'Cardiovascular Issues', desc: 'Blood pressure, heart conditions' },
-  { icon: '💧', title: 'Diabetes', desc: 'Type 1 or Type 2 diabetes' },
-  { icon: '🧠', title: 'Neurological Conditions', desc: 'Migraines, nerve-related issues' },
-  { icon: '🌸', title: 'Skin Conditions', desc: 'Eczema, psoriasis, acne' },
-  { icon: '🌸', title: 'Hormonal / Fertility', desc: 'PCOS, thyroid, fertility concerns' },
-];
+import { HEALTH_CONDITIONS } from '@/constants/wellness';
 
 const StepHealthHistory: React.FC = () => {
   const { healthConditions, setHealthConditions } = useAppStore();

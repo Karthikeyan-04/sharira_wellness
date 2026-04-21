@@ -17,12 +17,24 @@ interface AppState {
     notifPref: NotifPref;
   };
 
+  userProfile: {
+    name: string;
+    email: string;
+    phone: string;
+    bio: string;
+    avatarUrl?: string;
+  };
+
+  savedVendorIds: string[];
+
   // Actions
   setHasOnboarded: (value: boolean) => void;
   setWellnessGoals: (goals: string[]) => void;
   setDosha: (dosha: Dosha) => void;
   setHealthConditions: (conditions: string[]) => void;
   setPreferences: (prefs: Partial<AppState['preferences']>) => void;
+  updateUserProfile: (profile: Partial<AppState['userProfile']>) => void;
+  toggleSavedVendor: (vendorId: string) => void;
   completeOnboarding: () => void;
   logout: () => void;
 }
@@ -42,6 +54,16 @@ export const useAppStore = create<AppState>()(
         notifPref: '',
       },
 
+      userProfile: {
+        name: 'Priya Nair',
+        email: 'priya.nair@example.com',
+        phone: '+91 98765 43210',
+        bio: 'Wellness Enthusiast · Yoga Practitioner',
+        avatarUrl: '',
+      },
+
+      savedVendorIds: [],
+
       setHasOnboarded: (value) => {
         set({ hasOnboarded: value });
         localStorage.setItem('hasOnboarded', value.toString());
@@ -52,6 +74,16 @@ export const useAppStore = create<AppState>()(
       setPreferences: (prefs) =>
         set((state) => ({
           preferences: { ...state.preferences, ...prefs },
+        })),
+      updateUserProfile: (profile) =>
+        set((state) => ({
+          userProfile: { ...state.userProfile, ...profile },
+        })),
+      toggleSavedVendor: (vendorId) =>
+        set((state) => ({
+          savedVendorIds: state.savedVendorIds.includes(vendorId)
+            ? state.savedVendorIds.filter((id) => id !== vendorId)
+            : [...state.savedVendorIds, vendorId],
         })),
       completeOnboarding: () => {
         set({ hasOnboarded: true });
@@ -70,6 +102,14 @@ export const useAppStore = create<AppState>()(
             centres: [],
             notifPref: '',
           },
+          userProfile: {
+            name: '',
+            email: '',
+            phone: '',
+            bio: '',
+            avatarUrl: '',
+          },
+          savedVendorIds: [],
         });
         localStorage.removeItem('hasOnboarded');
       },

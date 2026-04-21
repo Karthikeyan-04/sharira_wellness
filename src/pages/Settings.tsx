@@ -2,27 +2,37 @@ import React from 'react';
 import { ArrowLeft, Bell, Lock, Eye, Globe, Moon, CreditCard, User, HelpCircle, ChevronRight, LogOut, ShieldCheck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const SettingItem = ({ icon: Icon, title, sub, hasToggle, hasArrow }: any) => (
-  <div className="flex items-center justify-between p-6 bg-white rounded-3xl border border-gray-100 hover:border-sage/20 transition-all cursor-pointer group">
-    <div className="flex items-center gap-4">
-      <div className="w-12 h-12 rounded-2xl bg-cream flex items-center justify-center text-forest-dark group-hover:bg-forest group-hover:text-white transition-colors">
-        <Icon className="w-6 h-6" />
+const SettingItem = ({ icon: Icon, title, sub, hasToggle, hasArrow, to }: any) => {
+  const content = (
+    <div className="flex items-center justify-between p-6 bg-white rounded-3xl border border-gray-100 hover:border-sage/20 transition-all cursor-pointer group w-full text-left">
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 rounded-2xl bg-cream flex items-center justify-center text-forest-dark group-hover:bg-forest group-hover:text-white transition-colors">
+          <Icon className="w-6 h-6" />
+        </div>
+        <div>
+          <h4 className="font-bold text-forest-dark text-sm">{title}</h4>
+          <p className="text-xs text-gray-400 font-light">{sub}</p>
+        </div>
       </div>
-      <div>
-        <h4 className="font-bold text-forest-dark text-sm">{title}</h4>
-        <p className="text-xs text-gray-400 font-light">{sub}</p>
+      <div className="flex items-center gap-4">
+        {hasToggle && (
+          <div className="w-10 h-6 bg-sage/20 rounded-full relative">
+             <div className="absolute left-1 top-1 w-4 h-4 bg-sage rounded-full" />
+          </div>
+        )}
+        {hasArrow && (
+          <ChevronRight className="w-4 h-4 text-gray-200 group-hover:text-forest transition-all" />
+        )}
       </div>
     </div>
-    {hasToggle && (
-      <div className="w-10 h-6 bg-sage/20 rounded-full relative">
-         <div className="absolute left-1 top-1 w-4 h-4 bg-sage rounded-full" />
-      </div>
-    )}
-    {hasArrow && (
-      <ChevronRight className="w-4 h-4 text-gray-200 group-hover:text-forest transition-all" />
-    )}
-  </div>
-);
+  );
+
+  if (to) {
+    return <Link to={to} className="block">{content}</Link>;
+  }
+
+  return content;
+};
 
 const Settings: React.FC = () => {
   const navigate = useNavigate();
@@ -47,9 +57,9 @@ const Settings: React.FC = () => {
         <section className="space-y-6">
           <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 px-2">Account Preferences</h3>
           <div className="space-y-4">
-            <SettingItem icon={User} title="Personal Info" sub="Name, email, and dosage type" hasArrow={true} />
+            <SettingItem icon={User} title="Personal Info" sub="Name, email, and dosage type" hasArrow={true} to="/personal-info" />
             <SettingItem icon={Bell} title="Notifications" sub="Manage wellness alerts" hasToggle={true} />
-            <SettingItem icon={CreditCard} title="Payments" sub="Saved methods & billing history" hasArrow={true} />
+            <SettingItem icon={CreditCard} title="Payments" sub="Saved methods & billing history" hasArrow={true} to="/payments" />
             <SettingItem icon={Globe} title="Language" sub="English (US)" hasArrow={true} />
           </div>
         </section>
@@ -58,7 +68,7 @@ const Settings: React.FC = () => {
         <section className="space-y-6">
           <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 px-2">Security & Privacy</h3>
           <div className="space-y-4">
-            <SettingItem icon={Lock} title="Password" sub="Last changed 3 months ago" hasArrow={true} />
+            <SettingItem icon={Lock} title="Password" sub="Last changed 3 months ago" hasArrow={true} to="/password-settings" />
             <SettingItem icon={Eye} title="Data Sharing" sub="Who can see your medical records" hasArrow={true} />
             <SettingItem icon={Moon} title="Dark Mode" sub="Automatic based on sunset" hasToggle={true} />
             <SettingItem icon={HelpCircle} title="Terms of Use" sub="Revised March 2024" hasArrow={true} />

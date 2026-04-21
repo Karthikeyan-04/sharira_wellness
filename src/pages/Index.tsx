@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Search, Bell, Star, ArrowRight, Gift, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SessionDetailPopup from '../components/SessionDetailPopup';
 
 const CategoryCard = ({ emoji, label, to }: { emoji: string; label: string; to: string }) => (
   <Link to={to} className="flex flex-col items-center gap-2 group cursor-pointer transition-transform hover:-translate-y-1">
@@ -11,10 +12,15 @@ const CategoryCard = ({ emoji, label, to }: { emoji: string; label: string; to: 
   </Link>
 );
 
-const WellnessCard = ({ title, sub, rating }: { title: string; sub: string; rating: string }) => (
+const WellnessCard = ({ title, sub, rating, image }: { title: string; sub: string; rating: string; image?: string }) => (
   <Link to="/vendor-profile" className="min-w-[240px] bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow shrink-0">
     <div className="h-32 bg-gray-200 relative">
-      <img src={`https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`} alt={title} className="w-full h-full object-cover" loading="lazy" />
+      <img 
+        src={image || `https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`} 
+        alt={title} 
+        className="w-full h-full object-cover" 
+        loading="lazy" 
+      />
       <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
         <Star className="w-3 h-3 text-gold fill-gold" />
         <span className="text-xs font-bold">{rating}</span>
@@ -28,8 +34,25 @@ const WellnessCard = ({ title, sub, rating }: { title: string; sub: string; rati
 );
 
 const Index: React.FC = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
+  const nextSession = {
+    title: "Kottakal Ayurveda",
+    service: "Abhyanga & Panchakarma",
+    date: "Tomorrow, Oct 24",
+    time: "10:00 AM",
+    price: "2,500",
+    status: "Confirmed",
+    location: "12/4, Greenways Road, RA Puram, Chennai"
+  };
+
   return (
     <div className="max-w-7xl mx-auto pb-4">
+      <SessionDetailPopup 
+        isOpen={isPopupOpen} 
+        onClose={() => setIsPopupOpen(false)} 
+        session={nextSession}
+      />
       {/* Header */}
       <header className="bg-forest-dark rounded-b-[48px] p-6 sm:p-8 pt-8 sm:pt-10 text-white shadow-lg space-y-6">
         <div className="flex items-start justify-between">
@@ -115,25 +138,32 @@ const Index: React.FC = () => {
             <Link to="/explore" className="text-sage text-sm font-semibold hover:underline">View All</Link>
           </div>
           <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x">
-            <WellnessCard title="Kottakal Ayurveda" sub="Abhyanga & Panchakarma" rating="4.9" />
-            <WellnessCard title="Serenity Spa" sub="Deep Tissue Massage" rating="4.8" />
-            <WellnessCard title="ZenYoga Studio" sub="Morning Flow & Hatha" rating="4.9" />
-            <WellnessCard title="Prana Wellness" sub="Holistic Detox" rating="4.7" />
+            <WellnessCard title="Kottakal Ayurveda" sub="Abhyanga & Panchakarma" rating="4.9" image="/images/centers/Kottakal-Ayurveda.png" />
+            <WellnessCard title="Serenity Spa" sub="Deep Tissue Massage" rating="4.8" image="/images/centers/Serenity-Spa.png" />
+            <WellnessCard title="ZenYoga Studio" sub="Morning Flow & Hatha" rating="4.9" image="/images/centers/ZenYoga-Studio.png" />
+            <WellnessCard title="Prana Wellness" sub="Holistic Detox" rating="4.7" image="/images/centers/Prana-Wellness.png" />
           </div>
         </section>
 
         {/* Booking Status / Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link to="/bookings" className="bg-forest-dark rounded-3xl p-6 text-white flex items-center justify-between group cursor-pointer hover:bg-forest transition-colors text-left">
-            <div>
+          <div className="bg-forest-dark rounded-3xl p-6 text-white flex items-center justify-between group transition-colors text-left relative">
+            <Link to="/bookings" className="flex-1">
               <p className="text-white/50 text-xs uppercase tracking-widest font-bold mb-2">Next Session</p>
-              <h5 className="font-display text-2xl mb-1">Kottakal Ayurveda</h5>
-              <p className="text-sm text-white/80 font-light">Tomorrow, 10:00 AM</p>
-            </div>
-            <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-gold transition-all group-hover:border-gold group-hover:text-forest-dark">
+              <h5 className="font-display text-2xl mb-1">{nextSession.title}</h5>
+              <p className="text-sm text-white/80 font-light">{nextSession.date}, {nextSession.time}</p>
+            </Link>
+            <div 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsPopupOpen(true);
+              }}
+              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-gold transition-all hover:border-gold hover:text-forest-dark cursor-pointer z-10"
+            >
               <ArrowRight className="w-6 h-6" />
             </div>
-          </Link>
+          </div>
 
           <Link to="/wellness-rewards" className="bg-sage rounded-3xl p-6 text-white flex items-center justify-between group cursor-pointer hover:bg-sage/90 transition-colors text-left">
             <div className="flex items-center gap-4">

@@ -1,16 +1,15 @@
 import React from 'react';
-import { ArrowLeft, Search, Sparkles, Dumbbell, Flower2, Heart, Activity, Stethoscope, Brain, Apple, Plus } from 'lucide-react';
+import { ArrowLeft, Search, Plus, Flower2, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const CategoryItem = ({ icon: Icon, title, count, to }: { icon: any; title: string; count: string; to: string }) => (
-  <Link to={to} className="bg-white p-4 pt-4 pb-4  rounded-[24px] shadow-sm hover:shadow-md transition-all border border-gray-50 flex flex-col items-start gap-4 group">
-    <div className="w-12 h-12 ml-5 rounded-2xl bg-cream flex items-center justify-center text-forest-dark group-hover:bg-forest group-hover:text-white transition-colors duration-300">
-      <Icon className="w-6 h-6" />
+const CategoryItem = ({ emoji, title, count, to }: { emoji: string; title: string; count: string; to: string }) => (
+  <Link to={to} className="bg-white p-6 rounded-[24px] shadow-sm hover:shadow-md transition-all border border-gray-50 flex flex-col items-center text-center gap-4 group">
+    <div className="w-14 h-14 rounded-2xl bg-cream flex items-center justify-center text-forest-dark group-hover:bg-forest group-hover:text-white transition-colors duration-300">
+      <span className="text-3xl">{emoji}</span>
     </div>
-    <div className="flex flex-col items-center justify-center" >
+    <div className="flex flex-col items-center">
       <h3 className="font-display text-xl text-forest-dark mb-1">{title}</h3>
-      <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">{count} vendors</p>
-
+      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{count} vendors</p>
     </div>
   </Link>
 );
@@ -38,17 +37,17 @@ const Categories: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <CategoryItem icon={Flower2} title="Ayurveda" count="340+" to="/ayurveda-results" />
-        <CategoryItem icon={Sparkles} title="Spa & Massage" count="520+" to="/explore" />
-        <CategoryItem icon={Dumbbell} title="Fitness" count="890+" to="/explore" />
-        <CategoryItem icon={Heart} title="Skin & Beauty" count="410+" to="/explore" />
-        <CategoryItem icon={Activity} title="Yoga & Mindfulness" count="670+" to="/explore" />
-        <CategoryItem icon={Stethoscope} title="Medical Tourism" count="120+" to="/explore" />
-        <CategoryItem icon={Stethoscope} title="Dental" count="210+" to="/explore" />
-        <CategoryItem icon={Flower2} title="Naturopathy" count="180+" to="/explore" />
-        <CategoryItem icon={Brain} title="Mental Wellness" count="450+" to="/explore" />
-        <CategoryItem icon={Activity} title="Physiotherapy" count="320+" to="/explore" />
-        <CategoryItem icon={Apple} title="Nutrition" count="290+" to="/explore" />
+        <CategoryItem emoji="🥣" title="Ayurveda" count="340+" to="/ayurveda-results" />
+        <CategoryItem emoji="🕯️" title="Spa & Massage" count="520+" to="/explore" />
+        <CategoryItem emoji="🏋️" title="Fitness" count="890+" to="/explore" />
+        <CategoryItem emoji="✨" title="Skin & Beauty" count="410+" to="/explore" />
+        <CategoryItem emoji="🧘" title="Yoga & Mindfulness" count="670+" to="/explore" />
+        <CategoryItem emoji="🏥" title="Medical Tourism" count="120+" to="/explore" />
+        <CategoryItem emoji="🦷" title="Dental" count="210+" to="/explore" />
+        <CategoryItem emoji="🌿" title="Naturopathy" count="180+" to="/explore" />
+        <CategoryItem emoji="🧠" title="Mental Wellness" count="450+" to="/explore" />
+        <CategoryItem emoji="🦴" title="Physiotherapy" count="320+" to="/explore" />
+        <CategoryItem emoji="🍎" title="Nutrition" count="290+" to="/explore" />
 
         <div className="bg-forest-dark p-6 rounded-[24px] flex flex-col items-center justify-center gap-4 text-center cursor-pointer hover:bg-forest transition-colors group">
           <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-gold group-hover:border-gold group-hover:text-forest-dark transition-all">

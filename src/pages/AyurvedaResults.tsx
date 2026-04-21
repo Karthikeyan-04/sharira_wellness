@@ -2,10 +2,10 @@ import React from 'react';
 import { ArrowLeft, Search, MapPin, Star, Heart, SlidersHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const ResultCard = ({ title, location, distance, rating, reviews }: any) => (
+const ResultCard = ({ title, location, distance, rating, reviews, image }: any) => (
   <Link to="/treatment-detail" className="bg-white rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-50 flex flex-col sm:flex-row group">
     <div className="w-full sm:w-48 h-48 sm:h-auto bg-gray-200 relative shrink-0">
-      <img src={`https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`} alt={title} className="w-full h-full object-cover" />
+      <img src={image || `https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`} alt={title} className="w-full h-full object-cover" />
       <button className="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-forest-dark hover:bg-white transition-colors">
         <Heart className="w-4 h-4" />
       </button>
@@ -79,6 +79,7 @@ const AyurvedaResults: React.FC = () => {
           distance="2.1 km"
           rating="4.9"
           reviews="128"
+          image="/images/centers/Kottakal-Ayurveda.png"
         />
         <ResultCard
           title="Serenity Wellness Spa"
@@ -86,13 +87,15 @@ const AyurvedaResults: React.FC = () => {
           distance="3.5 km"
           rating="4.8"
           reviews="94"
+          image="/images/centers/Serenity-Spa.png"
         />
         <ResultCard
-          title="Glow Aesthetics Clinic"
+          title="Veda Ayurvedic Spa"
           location="Nungambakkam"
           distance="4.2 km"
           rating="4.7"
           reviews="210"
+          image="/images/centers/Veda-Ayurvedic-Spa.png"
         />
         <ResultCard
           title="ZenYoga & Wellness"
@@ -100,6 +103,7 @@ const AyurvedaResults: React.FC = () => {
           distance="5.8 km"
           rating="4.9"
           reviews="156"
+          image="/images/centers/ZenYoga-Studio.png"
         />
       </div>
 

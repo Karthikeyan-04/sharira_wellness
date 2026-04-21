@@ -1,11 +1,6 @@
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
-
-const DOSHAS = [
-  { icon: '🌬️', title: 'Vata', desc: 'Air & Space - Creative, light, quick-thinking. Tends toward anxiety when imbalanced.' },
-  { icon: '🔥', title: 'Pitta', desc: 'Fire & Water - Intense, focused, driven. Prone to inflammation when imbalanced.' },
-  { icon: '🌍', title: 'Kapha', desc: 'Earth & Water - Steady, calm, nurturing. Prone to weight gain when imbalanced.' },
-];
+import { DOSHAS } from '@/constants/wellness';
 
 const StepDoshaQuiz: React.FC = () => {
   const { dosha, setDosha } = useAppStore();
@@ -48,9 +43,7 @@ const StepDoshaQuiz: React.FC = () => {
               Selected: {dosha} Profile
             </div>
             <div className="ob-card-desc">
-              {dosha === 'Vata' && 'Thin frame · Dry skin · Light sleeper · Creative · Prone to anxiety · Best treatments: Abhyanga, Shirodhara, Basti therapy'}
-              {dosha === 'Pitta' && 'Medium build · Sharp mind · Driven · Prone to inflammation · Best treatments: Shirodhara, Pitta-pacifying oils, Cooling therapy'}
-              {dosha === 'Kapha' && 'Sturdy build · Calm nature · Enduring · Prone to weight gain · Best treatments: Udwarthana, Panchakarma, Stimulating massages'}
+              {DOSHAS.find(d => d.title === dosha)?.summary}. Best treatments: {DOSHAS.find(d => d.title === dosha)?.treatments}
             </div>
           </div>
         </div>

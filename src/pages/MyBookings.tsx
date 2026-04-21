@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, Clock, ChevronRight, AlertCircle, History, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SessionDetailPopup from '../components/SessionDetailPopup';
 
-const BookingCard = ({ title, service, date, time, price, status, isPast }: any) => (
+const BookingCard = ({ title, service, date, time, price, status, isPast, onViewDetails }: any) => (
   <div className={`bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm transition-all group hover:shadow-md ${isPast ? 'opacity-70' : ''}`}>
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-3">
@@ -48,7 +49,10 @@ const BookingCard = ({ title, service, date, time, price, status, isPast }: any)
           <ChevronRight className="w-3 h-3" />
         </button>
       )}
-      <button className="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-forest transition-colors">
+      <button 
+        onClick={onViewDetails}
+        className="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-forest transition-colors"
+      >
         View Details
       </button>
     </div>
@@ -56,8 +60,19 @@ const BookingCard = ({ title, service, date, time, price, status, isPast }: any)
 );
 
 const MyBookings: React.FC = () => {
+  const [selectedSession, setSelectedSession] = useState<any>(null);
+  
+  const handleViewDetails = (booking: any) => {
+    setSelectedSession(booking);
+  };
+
   return (
     <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
+      <SessionDetailPopup 
+        isOpen={!!selectedSession} 
+        onClose={() => setSelectedSession(null)} 
+        session={selectedSession}
+      />
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
@@ -89,6 +104,14 @@ const MyBookings: React.FC = () => {
             time="09:00 AM" 
             price="2,500" 
             status="Confirmed" 
+            onViewDetails={() => handleViewDetails({
+                title: "Kottakal Ayurveda",
+                service: "Panchakarma",
+                date: "Thu, Mar 5",
+                time: "09:00 AM",
+                price: "2,500",
+                status: "Confirmed"
+            })}
           />
           <BookingCard 
             title="Serenity Spa" 
@@ -97,6 +120,14 @@ const MyBookings: React.FC = () => {
             time="11:00 AM" 
             price="1,500" 
             status="Upcoming" 
+            onViewDetails={() => handleViewDetails({
+                title: "Serenity Spa",
+                service: "Deep Tissue Ritual",
+                date: "Sat, Mar 8",
+                time: "11:00 AM",
+                price: "1,500",
+                status: "Upcoming"
+            })}
           />
         </div>
       </section>
@@ -116,6 +147,14 @@ const MyBookings: React.FC = () => {
             price="600" 
             status="Completed" 
             isPast={true}
+            onViewDetails={() => handleViewDetails({
+                title: "ZenYoga Sanctuary",
+                service: "Hatha Flow Session",
+                date: "Wed, Mar 1",
+                time: "07:00 AM",
+                price: "600",
+                status: "Completed"
+            })}
           />
           <BookingCard 
             title="Glow Aesthetics" 
@@ -125,6 +164,14 @@ const MyBookings: React.FC = () => {
             price="2,500" 
             status="Completed" 
             isPast={true}
+            onViewDetails={() => handleViewDetails({
+                title: "Glow Aesthetics",
+                service: "HydraFacial Treatment",
+                date: "Feb 20",
+                time: "02:00 PM",
+                price: "2,500",
+                status: "Completed"
+            })}
           />
         </div>
       </section>

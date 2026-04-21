@@ -1,17 +1,6 @@
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
-
-const WELLNESS_GOALS = [
-  { icon: '🧘', title: 'Stress & Anxiety', desc: 'Restore calm & mental clarity' },
-  { icon: '🦴', title: 'Joint & Arthritis Pain', desc: 'Chronic pain & mobility' },
-  { icon: '💧', title: 'Diabetes & Metabolic', desc: 'Lifestyle disease management' },
-  { icon: '🍃', title: 'Detox & Cleanse', desc: 'Panchakarma deep detox' },
-  { icon: '✨', title: 'Skin Disorders', desc: 'Psoriasis, eczema, acne' },
-  { icon: '⚡', title: 'Weight Loss', desc: 'Metabolic detox retreat' },
-  { icon: '🌸', title: 'Fertility & Hormonal', desc: 'Hormonal balance & fertility' },
-  { icon: '😴', title: 'Sleep & Insomnia', desc: 'Restore deep sleep patterns' },
-  { icon: '🏥', title: 'Medical Tourism', desc: 'International wellness stays' },
-];
+import { WELLNESS_GOALS } from '@/constants/wellness';
 
 const StepWellnessGoals: React.FC = () => {
   const { wellnessGoals, setWellnessGoals } = useAppStore();

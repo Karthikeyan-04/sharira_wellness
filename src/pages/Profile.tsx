@@ -1,6 +1,7 @@
 import React from 'react';
 import { User, Shield, Award, History, Heart, Star, ChevronRight, LogOut, Settings, Bell, FileText, Gift } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppStore } from '@/store/useAppStore';
 
 const ProfileStat = ({ label, value }: { label: string; value: string }) => (
   <div className="bg-white p-6 rounded-3xl border border-gray-100 flex flex-col items-center text-center">
@@ -26,6 +27,7 @@ const ProfileLink = ({ icon: Icon, title, to, badge }: { icon: any; title: strin
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
+  const { userProfile, dosha } = useAppStore();
 
   return (
     <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
@@ -33,7 +35,11 @@ const Profile: React.FC = () => {
       <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
         <div className="relative">
           <div className="w-32 h-32 rounded-[40px] bg-cream flex items-center justify-center border-4 border-white shadow-xl overflow-hidden">
-            <User className="w-16 h-16 text-sage" />
+            {userProfile.avatarUrl ? (
+              <img src={userProfile.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
+            ) : (
+              <User className="w-16 h-16 text-sage" />
+            )}
           </div>
           <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gold rounded-2xl flex items-center justify-center border-4 border-white text-forest-dark shadow-lg">
             <Award className="w-5 h-5" />
@@ -42,14 +48,14 @@ const Profile: React.FC = () => {
         
         <div className="text-center sm:text-left space-y-2">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-            <h2 className="font-display text-4xl text-forest-dark">Priya Nair</h2>
+            <h2 className="font-display text-4xl text-forest-dark">{userProfile.name || 'Set Name'}</h2>
             <span className="inline-flex items-center gap-1.5 bg-sage/10 text-sage px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest self-center sm:self-auto">
               Silver Member
             </span>
           </div>
-          <p className="text-gray-500 font-medium italic">Vata-Pitta Prakriti · Wellness Enthusiast</p>
+          <p className="text-gray-500 font-medium italic">{dosha ? `${dosha} Prakriti` : 'Set Prakriti'} · {userProfile.bio || 'Wellness Enthusiast'}</p>
           <div className="flex items-center justify-center sm:justify-start gap-4 pt-2">
-            <button className="text-xs font-bold text-sage hover:underline">Edit Profile</button>
+            <Link to="/personal-info" className="text-xs font-bold text-sage hover:underline">Edit Profile</Link>
             <span className="w-1 h-1 bg-gray-300 rounded-full" />
             <button 
               className="text-xs font-bold text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1"
@@ -77,7 +83,7 @@ const Profile: React.FC = () => {
         <div className="space-y-6">
           <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 px-2">My Activity</h3>
           <div className="space-y-3">
-            <ProfileLink icon={Heart} title="Saved Vendors" to="/explore" />
+            <ProfileLink icon={Heart} title="Saved Vendors" to="/saved-vendors" />
             <ProfileLink icon={History} title="Booking History" to="/bookings" />
             <ProfileLink icon={Star} title="My Reviews" to="/profile" />
             <ProfileLink icon={Bell} title="Notifications" to="/notifications" badge="3" />

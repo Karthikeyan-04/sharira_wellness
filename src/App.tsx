@@ -25,6 +25,10 @@ const Messages = lazy(() => import('@/pages/Messages'));
 const HelpSupport = lazy(() => import('@/pages/HelpSupport'));
 const NotificationsPage = lazy(() => import('@/pages/Notifications'));
 const Settings = lazy(() => import('@/pages/Settings'));
+const SavedVendors = lazy(() => import('@/pages/SavedVendors'));
+const PersonalInfo = lazy(() => import('@/pages/PersonalInfo'));
+const Payments = lazy(() => import('@/pages/Payments'));
+const PasswordSettings = lazy(() => import('@/pages/PasswordSettings'));
 const Login = lazy(() => import('@/pages/onboarding/Login'));
 const OTP = lazy(() => import('@/pages/onboarding/OTP'));
 const OnboardingFlow = lazy(() => import('@/pages/onboarding/OnboardingFlow'));
@@ -72,7 +76,11 @@ function App() {
             <Route path="health-records" element={<HealthRecords />} />
             <Route path="wellness-rewards" element={<WellnessRewards />} />
             <Route path="consent-management" element={<ConsentManagement />} />
+            <Route path="saved-vendors" element={<SavedVendors />} />
+            <Route path="personal-info" element={<PersonalInfo />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="payments" element={<Payments />} />
+            <Route path="password-settings" element={<PasswordSettings />} />
           </Route>
         </Routes>
       </Suspense>
