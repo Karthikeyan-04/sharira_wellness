@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { useAppStore } from '@/store/useAppStore';
 import './OnboardingStyles.css';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const completeOnboarding = useAppStore(state => state.completeOnboarding);
   const [activeTab, setActiveTab] = useState<'signin' | 'register'>('signin');
 
   // Sign In state
@@ -24,7 +26,7 @@ const Login: React.FC = () => {
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem('hasOnboarded', 'true');
+    completeOnboarding();
     navigate('/');
   };
 
