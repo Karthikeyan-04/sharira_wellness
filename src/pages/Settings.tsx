@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowLeft, Bell, Lock, Eye, Globe, Moon, CreditCard, User, HelpCircle, ChevronRight, LogOut, ShieldCheck } from 'lucide-react';
+import { Bell, Lock, Eye, Globe, Moon, CreditCard, User, HelpCircle, ChevronRight, LogOut, ShieldCheck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import PageHeader from '@/components/PageHeader';
 
 const SettingItem = ({ icon: Icon, title, sub, hasToggle, hasArrow, to }: any) => {
   const content = (
@@ -43,14 +44,10 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10 pb-20">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link to="/profile" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <h2 className="font-display text-4xl text-forest-dark">Settings</h2>
-      </div>
+    <div className="pb-20">
+      <PageHeader title="Settings" backTo="/profile" />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Personal & Account */}
@@ -95,6 +92,7 @@ const Settings: React.FC = () => {
          <p className="text-xs text-gray-500 font-light leading-relaxed max-w-sm">
            Your data security is our highest priority. All settings are synced across your devices with end-to-end encryption.
          </p>
+      </div>
       </div>
     </div>
   );

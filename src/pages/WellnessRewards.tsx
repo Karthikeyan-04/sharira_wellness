@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowLeft, Gift, Award, TrendingUp, ChevronRight, UserPlus, Zap, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Gift, Award, TrendingUp, ChevronRight, UserPlus, Zap, Star } from 'lucide-react';
+
+import PageHeader from '@/components/PageHeader';
 
 const RewardCard = ({ title, description, cost, isNew }: any) => (
   <div className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
@@ -22,14 +23,10 @@ const RewardCard = ({ title, description, cost, isNew }: any) => (
 
 const WellnessRewards: React.FC = () => {
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto space-y-12 pb-20">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link to="/profile" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <h2 className="font-display text-4xl text-forest-dark">Wellness Rewards</h2>
-      </div>
+    <div className="pb-20">
+      <PageHeader title="Wellness Rewards" backTo="/profile" />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto space-y-12">
 
       {/* Hero Tier Card */}
       <div className="bg-gradient-to-br from-forest-dark to-forest p-10 rounded-[48px] text-white overflow-hidden relative group">
@@ -126,6 +123,7 @@ const WellnessRewards: React.FC = () => {
           ))}
         </div>
       </section>
+      </div>
     </div>
   );
 };

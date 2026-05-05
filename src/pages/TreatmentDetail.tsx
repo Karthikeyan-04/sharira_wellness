@@ -26,7 +26,7 @@ const TreatmentDetail: React.FC = () => {
       {/* Hero Header */}
       <div className="h-[40vh] sm:h-[50vh] relative min-h-[300px]">
         <img 
-          src="https://placehold.co/1200x800/1c451c/FFFFFF?text=Panchakarma+Detox" 
+          src="/images/services/Panchakarma Detox.png" 
           alt="Panchakarma Detox" 
           className="w-full h-full object-cover"
         />

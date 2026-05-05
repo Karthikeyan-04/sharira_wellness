@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowLeft, MessageCircle, Mail, Phone, ExternalLink, HelpCircle, ChevronRight, UploadCloud, Shield } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { MessageCircle, Mail, Phone, ExternalLink, HelpCircle, ChevronRight, UploadCloud, Shield } from 'lucide-react';
+import PageHeader from '@/components/PageHeader';
 
 const FaqItem = ({ q, a }: { q: string; a: string }) => (
   <div className="p-6 bg-white rounded-3xl border border-gray-100 hover:border-sage/20 transition-all cursor-pointer group">
@@ -30,14 +30,10 @@ const SupportChannel = ({ icon: Icon, title, val, sub }: any) => (
 
 const HelpSupport: React.FC = () => {
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-12 pb-20">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link to="/profile" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <h2 className="font-display text-4xl text-forest-dark">Help & Support</h2>
-      </div>
+    <div className="pb-20">
+      <PageHeader title="Help & Support" backTo="/profile" />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-12">
 
       {/* Support Ticket Section */}
       <section className="bg-forest-dark p-8 sm:p-12 rounded-[48px] text-white relative overflow-hidden group">
@@ -106,6 +102,7 @@ const HelpSupport: React.FC = () => {
            <HelpCircle className="w-4 h-4 text-sage" />
            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Version 2.4.0 · Curated with Mindfulness</span>
         </div>
+      </div>
       </div>
     </div>
   );

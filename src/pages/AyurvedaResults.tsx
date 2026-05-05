@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowLeft, Search, MapPin, Star, Heart, SlidersHorizontal } from 'lucide-react';
+import { Search, MapPin, Star, Heart, SlidersHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageHeader from '@/components/PageHeader';
 
 const ResultCard = ({ title, location, distance, rating, reviews, image }: any) => (
   <Link to="/treatment-detail" className="bg-white rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-50 flex flex-col sm:flex-row group">
@@ -44,31 +45,44 @@ const ResultCard = ({ title, location, distance, rating, reviews, image }: any) 
 );
 
 const AyurvedaResults: React.FC = () => {
-  return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto space-y-8">
-      {/* Search & Filter Bar */}
-      <div className="flex items-center gap-4">
-        <Link to="/categories" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 shrink-0">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <div className="flex-1 relative">
-          <input
-            type="text"
-            placeholder="Search Ayurveda in Chennai..."
-            className="w-full pl-4 pr-12 py-3 bg-white rounded-2xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-sage/20 text-forest-dark"
-          />
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-        </div>
-        <button className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm hover:bg-gray-50 border border-gray-100 shrink-0">
-          <SlidersHorizontal className="w-5 h-5 text-forest-dark" />
-        </button>
+  const searchActions = (
+    <div className="flex items-center gap-3">
+      <div className="relative w-64 hidden md:block">
+        <input
+          type="text"
+          placeholder="Search in Chennai..."
+          className="w-full pl-4 pr-10 py-2.5 bg-white/10 border border-white/10 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold text-sm backdrop-blur-sm transition-all"
+        />
+        <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50" />
       </div>
+      <button className="w-10 h-10 bg-white/10 text-white rounded-xl flex items-center justify-center border border-white/10 hover:bg-white/20 transition-all backdrop-blur-sm">
+        <SlidersHorizontal className="w-5 h-5" />
+      </button>
+    </div>
+  );
+
+  return (
+    <div className="pb-20">
+      <PageHeader 
+        title="Ayurveda" 
+        subtitle="340 results in Chennai"
+        backTo="/categories"
+        rightAction={searchActions}
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto space-y-8">
+        <div className="md:hidden space-y-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search Ayurveda in Chennai..."
+              className="w-full pl-4 pr-12 py-3 bg-white rounded-2xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-sage/20 text-forest-dark"
+            />
+            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          </div>
+        </div>
 
       <div className="flex items-center justify-between">
-        <div>
-          <h2 className="font-display text-3xl sm:text-4xl text-forest-dark">Ayurveda in Chennai</h2>
-          <p className="text-gray-500 mt-1 font-medium">340 results matching your preferences</p>
-        </div>
       </div>
 
       {/* Results List */}
@@ -117,6 +131,7 @@ const AyurvedaResults: React.FC = () => {
             </button>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { ArrowLeft, User, Camera, Mail, Phone, FileText, CheckCircle2, Sparkles, AlertCircle } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { User, Camera, Mail, Phone, CheckCircle2, Sparkles, AlertCircle } from 'lucide-react';
+
+import PageHeader from '@/components/PageHeader';
 import { useAppStore } from '@/store/useAppStore';
 import { WELLNESS_GOALS, DOSHAS, HEALTH_CONDITIONS } from '@/constants/wellness';
 
 const PersonalInfo: React.FC = () => {
-  const navigate = useNavigate();
+
   const { 
     userProfile, 
     updateUserProfile, 
@@ -63,33 +64,34 @@ const PersonalInfo: React.FC = () => {
     );
   };
 
+  const saveButton = (
+    <button
+      onClick={handleSave}
+      disabled={isSaving}
+      className={`px-6 py-2 rounded-xl font-bold transition-all flex items-center gap-2 ${
+        showSuccess 
+          ? 'bg-green-500 text-white shadow-green-100' 
+          : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/10 shadow-xl'
+      } disabled:opacity-50`}
+    >
+      {isSaving ? (
+        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+      ) : showSuccess ? (
+        <CheckCircle2 className="w-4 h-4" />
+      ) : null}
+      {isSaving ? 'Saving...' : showSuccess ? 'Saved' : 'Save'}
+    </button>
+  );
+
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-10 pb-24">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link to="/settings" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 transition-all border border-gray-100">
-            <ArrowLeft className="w-5 h-5 text-forest-dark" />
-          </Link>
-          <h2 className="font-display text-4xl text-forest-dark">Personal Info</h2>
-        </div>
-        <button
-          onClick={handleSave}
-          disabled={isSaving}
-          className={`px-6 py-2 rounded-xl font-bold transition-all flex items-center gap-2 ${
-            showSuccess 
-              ? 'bg-green-500 text-white shadow-green-100' 
-              : 'bg-forest-dark text-white hover:bg-forest shadow-xl'
-          } disabled:opacity-50`}
-        >
-          {isSaving ? (
-            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-          ) : showSuccess ? (
-            <CheckCircle2 className="w-4 h-4" />
-          ) : null}
-          {isSaving ? 'Saving...' : showSuccess ? 'Saved' : 'Save Changes'}
-        </button>
-      </div>
+    <div className="pb-24">
+      <PageHeader 
+        title="Personal Info" 
+        backTo="/settings" 
+        rightAction={saveButton}
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-10">
 
       {/* Avatar Section */}
       <div className="flex flex-col items-center space-y-4">
@@ -255,6 +257,7 @@ const PersonalInfo: React.FC = () => {
         <p className="text-xs text-amber-800 leading-relaxed font-medium">
           Note: Your wellness identity is used by our Ayurvedic specialists to recommend accurate treatments. Frequent changes may affect your treatment plan consistency.
         </p>
+      </div>
       </div>
     </div>
   );

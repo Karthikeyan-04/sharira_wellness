@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowLeft, CreditCard, Plus, History, ChevronRight, Smartphone, Landmark, ShieldCheck, Wallet, Receipt } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { CreditCard, Plus, Smartphone, Landmark, ShieldCheck, Wallet, Receipt } from 'lucide-react';
+
+import PageHeader from '@/components/PageHeader';
 
 const PaymentMethodItem = ({ icon: Icon, title, sub, isLast }: any) => (
   <div className={`flex items-center justify-between py-5 ${!isLast ? 'border-b border-gray-50' : ''}`}>
@@ -40,21 +41,22 @@ const TransactionItem = ({ vendor, service, date, amount, status }: any) => (
 );
 
 const Payments: React.FC = () => {
+  const addNewButton = (
+    <button className="flex items-center gap-2 bg-white/10 text-white px-5 py-2.5 rounded-2xl font-bold text-xs hover:bg-white/20 transition-all border border-white/10 active:scale-95">
+      <Plus className="w-4 h-4" />
+      Add New
+    </button>
+  );
+
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-10 pb-24">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link to="/settings" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 transition-all border border-gray-100">
-            <ArrowLeft className="w-5 h-5 text-forest-dark" />
-          </Link>
-          <h2 className="font-display text-4xl text-forest-dark">Payments</h2>
-        </div>
-        <button className="flex items-center gap-2 bg-forest-dark text-white px-5 py-2.5 rounded-2xl font-bold text-xs hover:bg-forest transition-all shadow-lg active:scale-95">
-          <Plus className="w-4 h-4" />
-          Add New
-        </button>
-      </div>
+    <div className="pb-24">
+      <PageHeader 
+        title="Payments" 
+        backTo="/settings" 
+        rightAction={addNewButton}
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-10">
 
       {/* Payment Methods Section */}
       <section className="space-y-6">
@@ -135,6 +137,7 @@ const Payments: React.FC = () => {
             All your payment information is encrypted and stored securely. We never share your financial data with anyone else.
           </p>
         </div>
+      </div>
       </div>
     </div>
   );

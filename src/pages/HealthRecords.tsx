@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowLeft, ShieldCheck, Activity, FileText, Download, Lock, ChevronRight, Share2 } from 'lucide-react';
+import { Activity, FileText, Download, Lock, ChevronRight, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageHeader from '@/components/PageHeader';
 
 const HealthMetric = ({ label, value, unit }: { label: string; value: string; unit: string }) => (
   <div className="bg-white p-4 rounded-2xl border border-gray-100 flex flex-col items-center justify-center text-center shadow-sm">
@@ -43,20 +44,14 @@ const MedicationItem = ({ name, dosage, note }: { name: string; dosage: string; 
 
 const HealthRecords: React.FC = () => {
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10 pb-20">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link to="/profile" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <div>
-          <h2 className="font-display text-4xl text-forest-dark">Health Records</h2>
-          <div className="flex items-center gap-2 text-[10px] font-bold text-sage uppercase tracking-widest mt-1">
-             <ShieldCheck className="w-4 h-4" />
-             AES-256 Bank-Grade Encryption
-          </div>
-        </div>
-      </div>
+    <div className="pb-20">
+      <PageHeader 
+        title="Health Records" 
+        subtitle="AES-256 Bank-Grade Encryption"
+        backTo="/profile" 
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
 
       <div className="bg-cream/50 p-6 rounded-3xl border border-sage/10 flex gap-4 items-start">
          <Lock className="w-6 h-6 text-sage shrink-0 mt-1" />
@@ -132,6 +127,7 @@ const HealthRecords: React.FC = () => {
             <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
+      </div>
       </div>
     </div>
   );

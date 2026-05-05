@@ -2,10 +2,10 @@ import React from 'react';
 import { ArrowLeft, Star, Users, Briefcase, ChevronRight, MapPin, Share2, Heart, ShieldCheck, Clock, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const TreatmentCard = ({ title, description, price, tag }: any) => (
+const TreatmentCard = ({ title, description, price, tag, image }: any) => (
   <Link to="/treatment-detail" className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group flex flex-col sm:flex-row items-center gap-6">
     <div className="w-full sm:w-32 h-32 bg-cream rounded-2xl flex items-center justify-center text-forest-dark shrink-0 overflow-hidden">
-      <img src={`https://placehold.co/200x200/1c451c/FFFFFF?text=${title.substring(0, 2)}`} alt={title} className="w-full h-full object-cover" />
+      <img src={image || `https://placehold.co/200x200/1c451c/FFFFFF?text=${title.substring(0, 2)}`} alt={title} className="w-full h-full object-cover" />
     </div>
     <div className="flex-1 text-center sm:text-left">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
@@ -30,7 +30,7 @@ const VendorProfile: React.FC = () => {
       {/* Hero Section */}
       <div className="h-[35vh] relative min-h-[250px] bg-forest-dark">
         <img
-          src="https://placehold.co/1200x600/1c451c/FFFFFF?text=Kottakal+Ayurveda+Centre"
+          src="/images/centers/Kottakal-Ayurveda.png"
           alt="Kottakal Ayurveda"
           className="w-full h-full object-cover opacity-60"
         />
@@ -50,16 +50,16 @@ const VendorProfile: React.FC = () => {
           </div>
         </div>
 
-        <div className="absolute -bottom-16 left-4 right-4 max-w-7xl mx-auto px-2 sm:px-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="absolute -bottom-20 left-4 right-4 max-w-7xl mx-auto px-2 sm:px-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="flex items-end gap-6">
             <div className="w-32 h-32 rounded-[40px] bg-white p-2 shadow-2xl shrink-0">
-              <div className="w-full h-full rounded-[34px] bg-cream flex items-center justify-center">
-                <img src="https://placehold.co/200x200/536C46/FFFFFF?text=K" alt="Logo" className="rounded-[30px]" />
+              <div className="w-full h-full rounded-[34px] bg-cream flex items-center justify-center overflow-hidden">
+                <img src="/images/centers/kottakal-logo.png" alt="Logo" className="w-full h-full object-cover" />
               </div>
             </div>
             <div className="pb-2 space-y-1">
               <h1 className="font-display text-4xl sm:text-5xl text-white">Kottakal Ayurveda Centre</h1>
-              <div className="flex items-center gap-2 text-white/60 text-sm">
+              <div className="flex items-center gap-2 text-black/60 text-sm">
                 <MapPin className="w-4 h-4" />
                 <span>Anna Nagar, Chennai</span>
               </div>
@@ -108,18 +108,21 @@ const VendorProfile: React.FC = () => {
                 description="A deep cleansing procedure involving five therapeutic actions to balance the doshas and eliminate toxins."
                 price="2,500"
                 tag="Instant Booking"
+                image="/images/services/panchakarma.png"
               />
               <TreatmentCard
                 title="Abhyanga Massage"
                 description="Warm medicated oil massage designed to improve circulation and reduce physical stress."
                 price="1,200"
                 tag="Highly Popular"
+                image="/images/services/abhyanga.png"
               />
               <TreatmentCard
                 title="Shirodhara"
                 description="Gentle pouring of liquids over the forehead to soothe the nervous system and induce deep relaxation."
                 price="1,800"
                 tag="Stress Relief"
+                image="/images/services/shirodhara.png"
               />
             </div>
           </section>
@@ -130,11 +133,15 @@ const VendorProfile: React.FC = () => {
               <button className="text-sage font-bold text-sm hover:underline">View Gallery</button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
-                  <img src={`https://placehold.co/400x400/1c451c/FFFFFF?text=Hall+${i}`} alt="Gallery" className="w-full h-full object-cover" />
-                </div>
-              ))}
+              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+                <img src="/images/centers/kottakal-atmosphere-1.png" alt="Gallery" className="w-full h-full object-cover" />
+              </div>
+              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+                <img src="/images/services/panchakarma.png" alt="Gallery" className="w-full h-full object-cover" />
+              </div>
+              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+                <img src="/images/services/abhyanga.png" alt="Gallery" className="w-full h-full object-cover" />
+              </div>
             </div>
           </section>
         </div>

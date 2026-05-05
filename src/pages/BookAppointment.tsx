@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { ArrowLeft, MapPin, Calendar as CalendarIcon, ChevronLeft, ChevronRight, Lock } from 'lucide-react';
+import { MapPin, Calendar as CalendarIcon, ChevronLeft, ChevronRight, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+import PageHeader from '@/components/PageHeader';
 
 const BookAppointment: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(5);
@@ -19,14 +21,10 @@ const BookAppointment: React.FC = () => {
   const times = ['08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM', '02:00 PM', '04:00 PM', '06:00 PM'];
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-8">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link to="/treatment-detail" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <h2 className="font-display text-3xl text-forest-dark">Book Appointment</h2>
-      </div>
+    <div className="pb-20">
+      <PageHeader title="Book Appointment" backTo="/treatment-detail" />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-8">
 
       {/* service Summary */}
       <div className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm flex items-center justify-between">
@@ -117,6 +115,7 @@ const BookAppointment: React.FC = () => {
         <Link to="/choose-practitioner" className="block w-full bg-forest-dark text-white text-center py-4 rounded-2xl font-bold hover:bg-forest transition-all shadow-lg active:scale-95">
           Continue to Choose Practitioner
         </Link>
+      </div>
       </div>
     </div>
   );

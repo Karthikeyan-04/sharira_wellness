@@ -1,6 +1,7 @@
 import React from 'react';
-import { Search, MapPin, Star, Heart } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageHeader from '@/components/PageHeader';
 import VendorCard from '@/components/VendorCard';
 
 const Explore: React.FC = () => {
@@ -68,7 +69,14 @@ const Explore: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-7xl mx-auto space-y-8">
+    <div className="space-y-8 pb-20">
+      <PageHeader 
+        title="Explore Wellness" 
+        subtitle="Discover centers near you"
+        backTo="/"
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-7xl mx-auto space-y-8">
       {/* Search & Filter Header */}
       <div className="flex gap-3 items-center bg-white p-3 rounded-[32px] shadow-sm border border-gray-100 overflow-x-auto scrollbar-hide snap-x">
         <div className="relative shrink-0 w-[280px] md:flex-1 md:w-auto snap-start">
@@ -87,8 +95,7 @@ const Explore: React.FC = () => {
 
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display text-3xl sm:text-5xl text-forest-dark">Explore Wellness</h2>
-          <p className="text-gray-500 mt-2 font-medium">Showing {vendors.length} results in Chennai</p>
+          <p className="text-gray-500 font-medium">Showing {vendors.length} results in Chennai</p>
         </div>
         <Link to="/categories" className="text-sage font-bold hover:underline">Browse Categories</Link>
       </div>
@@ -98,6 +105,7 @@ const Explore: React.FC = () => {
         {vendors.map((vendor) => (
           <VendorCard key={vendor.id} {...vendor} />
         ))}
+      </div>
       </div>
     </div>
   );

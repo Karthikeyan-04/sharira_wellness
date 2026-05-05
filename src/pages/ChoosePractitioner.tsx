@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, User, Star, ShieldCheck, Quote } from 'lucide-react';
+import { User, Star, ShieldCheck, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageHeader from '@/components/PageHeader';
 
 const PractitionerCard = ({ name, title, exp, about, isActive, onClick, rating }: any) => (
   <div 
@@ -62,17 +63,14 @@ const ChoosePractitioner: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link to="/book-appointment" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 shrink-0">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <div>
-          <h2 className="font-display text-3xl sm:text-4xl text-forest-dark">Choose Practitioner</h2>
-          <p className="text-sm text-gray-500 font-medium">Panchakarma Detox · Kottakal Ayurveda · 90 min</p>
-        </div>
-      </div>
+    <div className="pb-20">
+      <PageHeader 
+        title="Choose Practitioner" 
+        subtitle="Panchakarma Detox · Kottakal Ayurveda · 90 min"
+        backTo="/book-appointment" 
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
 
       {/* Practitioner List */}
       <div className="space-y-6">
@@ -125,6 +123,7 @@ const ChoosePractitioner: React.FC = () => {
         <button className="w-full text-center mt-4 text-xs text-sage font-bold hover:underline">
           Skip — assign automatically
         </button>
+      </div>
       </div>
     </div>
   );

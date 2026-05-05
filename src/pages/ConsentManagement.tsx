@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShieldCheck, Eye, EyeOff, Info, Lock, CheckCircle2, XCircle, Search, Trash2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ShieldCheck, Eye, EyeOff, Info, Lock, CheckCircle2, XCircle, Search, Trash2 } from 'lucide-react';
+
+import PageHeader from '@/components/PageHeader';
 
 const SharedWithCard = ({ name, facility, date, onRevoke }: any) => (
   <div className="flex items-center justify-between p-6 bg-white rounded-[24px] border border-gray-100 shadow-sm hover:shadow-md transition-all group">
@@ -27,17 +28,14 @@ const ConsentManagement: React.FC = () => {
   const [showAudit, setShowAudit] = useState(false);
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10 pb-20">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link to="/health-records" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
-          <ArrowLeft className="w-5 h-5 text-forest-dark" />
-        </Link>
-        <div>
-          <h2 className="font-display text-4xl text-forest-dark">Sharing & Consent</h2>
-          <p className="text-sm text-gray-500 font-medium mt-1">You decide who sees your health data</p>
-        </div>
-      </div>
+    <div className="pb-20">
+      <PageHeader 
+        title="Sharing & Consent" 
+        subtitle="You decide who sees your health data"
+        backTo="/health-records" 
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
 
       {/* Info Panel */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -119,6 +117,7 @@ const ConsentManagement: React.FC = () => {
           </div>
         </div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      </div>
       </div>
     </div>
   );

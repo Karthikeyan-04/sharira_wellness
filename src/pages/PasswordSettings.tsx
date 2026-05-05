@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Lock, Eye, EyeOff, ShieldCheck, CheckCircle2, AlertCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Eye, EyeOff, ShieldCheck, CheckCircle2, AlertCircle } from 'lucide-react';
+
+import PageHeader from '@/components/PageHeader';
 
 const PasswordSettings: React.FC = () => {
   const [showCurrent, setShowCurrent] = useState(false);
@@ -37,16 +38,10 @@ const PasswordSettings: React.FC = () => {
   const strength = getStrength(passwords.new);
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-2xl mx-auto space-y-10 pb-24">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link to="/settings" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 transition-all border border-gray-100">
-            <ArrowLeft className="w-5 h-5 text-forest-dark" />
-          </Link>
-          <h2 className="font-display text-4xl text-forest-dark">Password</h2>
-        </div>
-      </div>
+    <div className="pb-24">
+      <PageHeader title="Password" backTo="/settings" />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-2xl mx-auto space-y-10">
 
       <div className="bg-cream/30 p-6 rounded-[32px] border border-gray-100 flex gap-4 items-start">
         <ShieldCheck className="w-6 h-6 text-sage shrink-0 mt-1" />
@@ -179,6 +174,7 @@ const PasswordSettings: React.FC = () => {
         <button className="text-[10px] text-gray-400 font-bold uppercase tracking-widest hover:text-forest-dark transition-colors">
           Forgot your current password?
         </button>
+      </div>
       </div>
     </div>
   );

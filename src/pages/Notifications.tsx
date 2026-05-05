@@ -1,6 +1,7 @@
 import React from 'react';
-import { Bell, CheckCircle, Percent, MessageSquare, Award, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Bell, CheckCircle, Percent, MessageSquare, Award } from 'lucide-react';
+
+import PageHeader from '@/components/PageHeader';
 
 const NotificationItem = ({ icon: Icon, title, message, time, type }: { icon: any; title: string; message: string; time: string; type: string }) => {
   const getIconBg = () => {
@@ -37,13 +38,10 @@ const SectionHeader = ({ children }: { children: React.ReactNode }) => (
 
 const NotificationsPage: React.FC = () => {
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto min-h-screen">
-      <div className="flex items-center gap-4 mb-8">
-        <Link to="/" className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 lg:hidden">
-          <ArrowLeft className="w-5 h-5" />
-        </Link>
-        <h2 className="font-display text-3xl sm:text-4xl text-forest-dark">Notifications</h2>
-      </div>
+    <div className="pb-20">
+      <PageHeader title="Notifications" backTo="/" />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto min-h-screen">
 
       <div className="space-y-4">
         <SectionHeader>Today</SectionHeader>
@@ -96,7 +94,8 @@ const NotificationsPage: React.FC = () => {
           </div>
           <div className="absolute top-1/2 -translate-y-1/2 -right-4 w-32 h-32 bg-gold/10 rounded-full blur-2xl group-hover:scale-125 transition-transform" />
           <Award className="absolute top-8 right-8 w-12 h-12 text-gold/20 group-hover:text-gold/40 transition-colors" />
-        </div>
+      </div>
+      </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowLeft, Heart, Search } from 'lucide-react';
+import { Heart, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageHeader from '@/components/PageHeader';
 import { useAppStore } from '@/store/useAppStore';
 import VendorCard from '@/components/VendorCard';
 
@@ -73,25 +74,14 @@ const SavedVendors: React.FC = () => {
   const savedVendors = ALL_VENDORS.filter(v => savedVendorIds.includes(v.id));
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-7xl mx-auto space-y-10 min-h-[80vh]">
-      {/* Header */}
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center gap-4">
-          <Link 
-            to="/profile" 
-            className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-forest-dark hover:bg-forest hover:text-white transition-all shadow-sm"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </Link>
-          <h1 className="font-display text-3xl sm:text-5xl text-forest-dark">Saved Vendors</h1>
-        </div>
-        
-        {savedVendors.length > 0 && (
-          <p className="text-gray-500 font-medium">
-            You have <span className="text-forest font-bold">{savedVendors.length}</span> wellness destinations saved in your circle.
-          </p>
-        )}
-      </div>
+    <div className="pb-20">
+      <PageHeader 
+        title="Saved Vendors" 
+        subtitle={savedVendors.length > 0 ? `${savedVendors.length} destinations in your circle` : undefined}
+        backTo="/profile" 
+      />
+      
+      <div className="p-4 sm:p-6 lg:p-10 max-w-7xl mx-auto space-y-10 min-h-[80vh]">
 
       {savedVendors.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -133,6 +123,7 @@ const SavedVendors: React.FC = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

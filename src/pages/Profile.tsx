@@ -30,46 +30,50 @@ const Profile: React.FC = () => {
   const { userProfile, dosha } = useAppStore();
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
+    <div className="pb-20">
       {/* Profile Header */}
-      <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-        <div className="relative">
-          <div className="w-32 h-32 rounded-[40px] bg-cream flex items-center justify-center border-4 border-white shadow-xl overflow-hidden">
-            {userProfile.avatarUrl ? (
-              <img src={userProfile.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
-            ) : (
-              <User className="w-16 h-16 text-sage" />
-            )}
+      <div className="bg-forest-dark rounded-b-[48px] p-6 sm:p-10 pt-10 sm:pt-16 text-white shadow-lg mb-10">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <div className="relative">
+            <div className="w-32 h-32 rounded-[40px] bg-cream flex items-center justify-center border-4 border-white shadow-xl overflow-hidden">
+              {userProfile.avatarUrl ? (
+                <img src={userProfile.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
+              ) : (
+                <User className="w-16 h-16 text-sage" />
+              )}
+            </div>
+            <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gold rounded-2xl flex items-center justify-center border-4 border-white text-forest-dark shadow-lg">
+              <Award className="w-5 h-5" />
+            </div>
           </div>
-          <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gold rounded-2xl flex items-center justify-center border-4 border-white text-forest-dark shadow-lg">
-            <Award className="w-5 h-5" />
-          </div>
-        </div>
-        
-        <div className="text-center sm:text-left space-y-2">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-            <h2 className="font-display text-4xl text-forest-dark">{userProfile.name || 'Set Name'}</h2>
-            <span className="inline-flex items-center gap-1.5 bg-sage/10 text-sage px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest self-center sm:self-auto">
-              Silver Member
-            </span>
-          </div>
-          <p className="text-gray-500 font-medium italic">{dosha ? `${dosha} Prakriti` : 'Set Prakriti'} · {userProfile.bio || 'Wellness Enthusiast'}</p>
-          <div className="flex items-center justify-center sm:justify-start gap-4 pt-2">
-            <Link to="/personal-info" className="text-xs font-bold text-sage hover:underline">Edit Profile</Link>
-            <span className="w-1 h-1 bg-gray-300 rounded-full" />
-            <button 
-              className="text-xs font-bold text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1"
-              onClick={() => {
-                localStorage.removeItem('hasOnboarded');
-                navigate('/onboarding/login');
-              }}
-            >
-              <LogOut className="w-3 h-3" />
-              Logout
-            </button>
+          
+          <div className="text-center sm:text-left space-y-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <h2 className="font-display text-4xl text-white">{userProfile.name || 'Set Name'}</h2>
+              <span className="inline-flex items-center gap-1.5 bg-white/10 text-gold px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest self-center sm:self-auto border border-white/10 backdrop-blur-sm">
+                Silver Member
+              </span>
+            </div>
+            <p className="text-white/60 font-medium italic">{dosha ? `${dosha} Prakriti` : 'Set Prakriti'} · {userProfile.bio || 'Wellness Enthusiast'}</p>
+            <div className="flex items-center justify-center sm:justify-start gap-4 pt-2">
+              <Link to="/personal-info" className="text-xs font-bold text-gold hover:underline">Edit Profile</Link>
+              <span className="w-1 h-1 bg-white/20 rounded-full" />
+              <button 
+                className="text-xs font-bold text-white/40 hover:text-red-400 transition-colors flex items-center gap-1"
+                onClick={() => {
+                  localStorage.removeItem('hasOnboarded');
+                  navigate('/onboarding/login');
+                }}
+              >
+                <LogOut className="w-3 h-3" />
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
 
       {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-4">
@@ -129,6 +133,7 @@ const Profile: React.FC = () => {
          <p className="text-sm text-gray-500 font-light leading-relaxed">
            You have exclusive access to global wellness experts and priority booking at our partner sanctuaries. 2,000 more points to reach <strong className="text-forest-dark">Gold Tier</strong>.
          </p>
+      </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppLayout from '@/components/AppLayout';
+import ScrollToTop from '@/components/ScrollToTop';
 
 // Lazy load all pages
 const Index = lazy(() => import('@/pages/Index'));
@@ -42,6 +43,7 @@ const PageLoader = () => (
 function App() {
   return (
     <Router basename="/">
+      <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Onboarding Flow (Full screen) */}
