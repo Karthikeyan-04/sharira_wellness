@@ -1,24 +1,9 @@
 import React from 'react';
-import { CreditCard, Plus, Smartphone, Landmark, ShieldCheck, Wallet, Receipt } from 'lucide-react';
+import { Plus, Landmark, Receipt } from 'lucide-react';
 
 import PageHeader from '@/components/PageHeader';
 
-const PaymentMethodItem = ({ icon: Icon, title, sub, isLast }: any) => (
-  <div className={`flex items-center justify-between py-5 ${!isLast ? 'border-b border-gray-50' : ''}`}>
-    <div className="flex items-center gap-4">
-      <div className="w-12 h-12 rounded-2xl bg-cream flex items-center justify-center text-forest-dark">
-        <Icon className="w-6 h-6" />
-      </div>
-      <div>
-        <h4 className="font-bold text-forest-dark text-sm">{title}</h4>
-        <p className="text-xs text-gray-400 font-light">{sub}</p>
-      </div>
-    </div>
-    <button className="text-[10px] font-bold text-sage uppercase tracking-widest hover:text-forest-dark transition-colors">
-      Edit
-    </button>
-  </div>
-);
+
 
 const TransactionItem = ({ vendor, service, date, amount, status }: any) => (
   <div className="flex items-center justify-between p-4 bg-white rounded-3xl border border-gray-50 hover:border-sage/20 transition-all cursor-pointer group">
