@@ -189,7 +189,7 @@
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 16px 20px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   transition: all 0.3s ease;
   width: 100%;
@@ -229,7 +229,7 @@ input[type="date"].onboarding-wrapper .ob-input-field {
 .onboarding-wrapper .ob-country-code {
   padding: 16px 15px;
   border-right: 1px solid #e5e7eb;
-  font-size: 14px;
+  font-size: 16px;
   color: #2c332c;
   background: #fdfdfd;
   white-space: nowrap;

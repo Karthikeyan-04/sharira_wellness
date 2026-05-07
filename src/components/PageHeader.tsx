@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface PageHeaderProps {
   title: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   showBackButton?: boolean;
   backTo?: string;
   rightAction?: React.ReactNode;

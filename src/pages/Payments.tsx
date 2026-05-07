@@ -50,94 +50,67 @@ const Payments: React.FC = () => {
 
   return (
     <div className="pb-24">
-      <PageHeader 
-        title="Payments" 
-        backTo="/settings" 
+      <PageHeader
+        title="Payments"
+        backTo="/settings"
         rightAction={addNewButton}
       />
-      
+
       <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-10">
 
-      {/* Payment Methods Section */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between px-2">
-          <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Saved Methods</h3>
-          <ShieldCheck className="w-4 h-4 text-sage" />
-        </div>
-        
-        <div className="bg-white rounded-[40px] p-8 shadow-sm border border-gray-100">
-          <PaymentMethodItem 
-            icon={Smartphone} 
-            title="Google Pay" 
-            sub="Linked to karthik****@okaxis" 
-          />
-          <PaymentMethodItem 
-            icon={CreditCard} 
-            title="HDFC Bank Debit Card" 
-            sub="Ending in •••• 4521" 
-          />
-          <PaymentMethodItem 
-            icon={Wallet} 
-            title="Sharira Wellness Wallet" 
-            sub="Current Balance: ₹450" 
-            isLast={true}
-          />
-        </div>
-      </section>
+        {/* Transaction History */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between px-2">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Billing History</h3>
+            <button className="text-[10px] font-bold text-forest-dark uppercase tracking-widest hover:underline">
+              View All
+            </button>
+          </div>
 
-      {/* Transaction History */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between px-2">
-          <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Billing History</h3>
-          <button className="text-[10px] font-bold text-forest-dark uppercase tracking-widest hover:underline">
-            View All
-          </button>
-        </div>
+          <div className="space-y-3">
+            <TransactionItem
+              vendor="Dr. Anjali Sharma"
+              service="Nadi Pariksha Consultation"
+              date="Apr 20, 2024"
+              amount="1,200"
+              status="Success"
+            />
+            <TransactionItem
+              vendor="Sattva Yoga Center"
+              service="Monthly Wellness Pass"
+              date="Apr 15, 2024"
+              amount="3,500"
+              status="Success"
+            />
+            <TransactionItem
+              vendor="AyurStore"
+              service="Triphala & Ashwagandha"
+              date="Apr 10, 2024"
+              amount="850"
+              status="Success"
+            />
+            <TransactionItem
+              vendor="Dr. Mehra's Clinic"
+              service="Follow-up Appointment"
+              date="Apr 02, 2024"
+              amount="1,200"
+              status="Processing"
+            />
+          </div>
+        </section>
 
-        <div className="space-y-3">
-          <TransactionItem 
-            vendor="Dr. Anjali Sharma" 
-            service="Nadi Pariksha Consultation" 
-            date="Apr 20, 2024" 
-            amount="1,200" 
-            status="Success" 
-          />
-          <TransactionItem 
-            vendor="Sattva Yoga Center" 
-            service="Monthly Wellness Pass" 
-            date="Apr 15, 2024" 
-            amount="3,500" 
-            status="Success" 
-          />
-          <TransactionItem 
-            vendor="AyurStore" 
-            service="Triphala & Ashwagandha" 
-            date="Apr 10, 2024" 
-            amount="850" 
-            status="Success" 
-          />
-          <TransactionItem 
-            vendor="Dr. Mehra's Clinic" 
-            service="Follow-up Appointment" 
-            date="Apr 02, 2024" 
-            amount="1,200" 
-            status="Processing" 
-          />
+        {/* Security Banner */}
+        <div className="bg-cream p-8 rounded-[48px] border border-gray-100 flex flex-col items-center text-center space-y-4">
+          <div className="w-16 h-16 bg-white/50 rounded-full flex items-center justify-center">
+            <Landmark className="w-8 h-8 text-forest" />
+          </div>
+          <div className="space-y-2">
+            <h4 className="font-display text-xl text-forest-dark">Bank-Grade Security</h4>
+            <p className="text-xs text-gray-500 font-light leading-relaxed max-w-sm">
+              All your payment information is encrypted and stored securely. We never share your financial data with anyone else.
+            </p>
+          </div>
         </div>
-      </section>
-
-      {/* Security Banner */}
-      <div className="bg-cream p-8 rounded-[48px] border border-gray-100 flex flex-col items-center text-center space-y-4">
-        <div className="w-16 h-16 bg-white/50 rounded-full flex items-center justify-center">
-           <Landmark className="w-8 h-8 text-forest" />
-        </div>
-        <div className="space-y-2">
-          <h4 className="font-display text-xl text-forest-dark">Bank-Grade Security</h4>
-          <p className="text-xs text-gray-500 font-light leading-relaxed max-w-sm">
-            All your payment information is encrypted and stored securely. We never share your financial data with anyone else.
-          </p>
-        </div>
-      </div>
       </div>
     </div>
   );

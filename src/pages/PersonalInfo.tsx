@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { User, Camera, Mail, Phone, CheckCircle2, Sparkles, AlertCircle } from 'lucide-react';
 
 import PageHeader from '@/components/PageHeader';
@@ -23,6 +23,23 @@ const PersonalInfo: React.FC = () => {
     email: userProfile.email,
     phone: userProfile.phone,
   });
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        updateUserProfile({ avatarUrl: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -64,31 +81,13 @@ const PersonalInfo: React.FC = () => {
     );
   };
 
-  const saveButton = (
-    <button
-      onClick={handleSave}
-      disabled={isSaving}
-      className={`px-6 py-2 rounded-xl font-bold transition-all flex items-center gap-2 ${
-        showSuccess 
-          ? 'bg-green-500 text-white shadow-green-100' 
-          : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/10 shadow-xl'
-      } disabled:opacity-50`}
-    >
-      {isSaving ? (
-        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-      ) : showSuccess ? (
-        <CheckCircle2 className="w-4 h-4" />
-      ) : null}
-      {isSaving ? 'Saving...' : showSuccess ? 'Saved' : 'Save'}
-    </button>
-  );
+
 
   return (
     <div className="pb-24">
       <PageHeader 
         title="Personal Info" 
         backTo="/settings" 
-        rightAction={saveButton}
       />
       
       <div className="p-4 sm:p-6 lg:p-10 max-w-3xl mx-auto space-y-10">
@@ -96,14 +95,27 @@ const PersonalInfo: React.FC = () => {
       {/* Avatar Section */}
       <div className="flex flex-col items-center space-y-4">
         <div className="relative group">
-          <div className="w-32 h-32 rounded-[48px] bg-cream border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept="image/*"
+            className="hidden"
+          />
+          <div 
+            onClick={handleImageClick}
+            className="w-32 h-32 rounded-[48px] bg-cream border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden cursor-pointer active:scale-95 transition-transform"
+          >
              {userProfile.avatarUrl ? (
                <img src={userProfile.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
              ) : (
                <User className="w-16 h-16 text-sage" />
              )}
           </div>
-          <button className="absolute -bottom-2 -right-2 w-10 h-10 bg-gold rounded-2xl flex items-center justify-center text-forest-dark border-4 border-white shadow-lg hover:scale-105 transition-transform">
+          <button 
+            onClick={handleImageClick}
+            className="absolute -bottom-2 -right-2 w-10 h-10 bg-gold rounded-2xl flex items-center justify-center text-forest-dark border-4 border-white shadow-lg hover:scale-105 transition-transform"
+          >
             <Camera className="w-5 h-5" />
           </button>
         </div>
@@ -258,6 +270,30 @@ const PersonalInfo: React.FC = () => {
           Note: Your wellness identity is used by our Ayurvedic specialists to recommend accurate treatments. Frequent changes may affect your treatment plan consistency.
         </p>
       </div>
+      </div>
+
+      {/* Fixed Bottom Bar */}
+      <div className="fixed bottom-[68px] left-0 right-0 bg-white border-t border-gray-100 p-4 z-40 flex items-center justify-between shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+        <div className="px-4">
+           <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Update Profile</p>
+           <p className="text-xs font-bold text-forest-dark uppercase">Sync to account</p>
+        </div>
+        <button
+          onClick={handleSave}
+          disabled={isSaving}
+          className={`px-10 py-4 rounded-[24px] font-bold transition-all flex items-center justify-center gap-3 shadow-xl ${
+            showSuccess 
+              ? 'bg-green-500 text-white' 
+              : 'bg-forest-dark text-white hover:bg-forest active:scale-95'
+          } disabled:opacity-50`}
+        >
+          {isSaving ? (
+            <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+          ) : showSuccess ? (
+            <CheckCircle2 className="w-5 h-5" />
+          ) : null}
+          {isSaving ? 'Updating...' : showSuccess ? 'Changes Saved' : 'Save Changes'}
+        </button>
       </div>
     </div>
   );

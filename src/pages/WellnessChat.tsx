@@ -93,7 +93,7 @@ const WellnessChat: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Message..."
-              className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 text-sm font-medium text-forest-dark py-2.5"
+              className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 text-base font-medium text-forest-dark py-2.5"
             />
           </div>
           <button className="w-11 h-11 bg-forest-dark text-white rounded-full flex items-center justify-center hover:bg-forest transition-all shadow-sm shrink-0 transform active:scale-95">

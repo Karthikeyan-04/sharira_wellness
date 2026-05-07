@@ -30,7 +30,7 @@ const VendorCard: React.FC<VendorCardProps> = ({
   return (
     <div className="bg-white rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-all group border border-gray-50 flex flex-col h-full">
       <div className="h-48 bg-gray-200 relative shrink-0">
-        <Link to="/treatment-detail" className="block h-full">
+        <Link to="/vendor-profile" className="block h-full">
           <img
             src={image || `https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`}
             alt={title}
@@ -57,7 +57,7 @@ const VendorCard: React.FC<VendorCardProps> = ({
       </div>
       <div className="p-5 flex flex-col flex-1">
         <div className="flex justify-between items-start mb-2 gap-2">
-          <Link to="/treatment-detail">
+          <Link to="/vendor-profile">
             <h3 className="font-display text-xl text-forest-dark group-hover:text-forest transition-colors line-clamp-1">
               {title}
             </h3>
@@ -76,7 +76,7 @@ const VendorCard: React.FC<VendorCardProps> = ({
             <p className="text-lg font-bold text-forest-dark">₹{price}</p>
           </div>
           <Link
-            to="/treatment-detail"
+            to="/vendor-profile"
             className="bg-forest-dark text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-forest transition-colors"
           >
             View Detail

@@ -5,7 +5,7 @@ import './OnboardingStyles.css';
 const OTP: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as { email?: string; phone?: string } | null;
+  const state = location.state as { email?: string; phone?: string; isForgotPassword?: boolean } | null;
   const custEmail = state?.email || 'hello@example.com';
   const custPhone = state?.phone || '+91 98765 43210';
 
@@ -13,6 +13,7 @@ const OTP: React.FC = () => {
   const [otpDest, setOtpDest] = useState(custEmail);
   const [digits, setDigits] = useState(['', '', '', '', '', '']);
   const [seconds, setSeconds] = useState(299);
+  const [isOtpSent, setIsOtpSent] = useState(false);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -33,10 +34,13 @@ const OTP: React.FC = () => {
   };
 
   useEffect(() => {
-    startTimer();
-    setTimeout(() => inputRefs.current[0]?.focus(), 300);
+    // We only focus if it's already sent, or maybe focus the "SEND OTP" button?
+    // For now, let's just keep the focus logic if sent.
+    if (isOtpSent) {
+      setTimeout(() => inputRefs.current[0]?.focus(), 300);
+    }
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, []);
+  }, [isOtpSent]);
 
   const formatTime = (s: number) => {
     const m = String(Math.floor(s / 60)).padStart(2, '0');
@@ -79,14 +83,28 @@ const OTP: React.FC = () => {
   };
 
   const handleVerify = () => {
+    if (!isOtpSent) {
+      setIsOtpSent(true);
+      startTimer();
+      return;
+    }
+    
     if (timerRef.current) clearInterval(timerRef.current);
-    navigate('/onboarding/flow');
+    if (state?.isForgotPassword) {
+      navigate('/onboarding/reset-password');
+    } else {
+      navigate('/onboarding/flow');
+    }
   };
 
   return (
     <div className="onboarding-wrapper">
       <header className="ob-header">
-        <button className="ob-back-btn" onClick={() => navigate('/onboarding/login')} aria-label="Go back">
+        <button 
+          className="ob-back-btn" 
+          onClick={() => state?.isForgotPassword ? navigate('/onboarding/forgot-password') : navigate('/onboarding/login')} 
+          aria-label="Go back"
+        >
           ←
         </button>
         <div className="ob-logo-container">
@@ -106,8 +124,17 @@ const OTP: React.FC = () => {
 
         <h2 className="ob-otp-page-title">Enter Verification Code</h2>
         <p className="ob-otp-page-sub">
-          We've sent a 6-digit code to<br />
-          <span className="ob-otp-dest">{otpDest}</span>
+          {isOtpSent ? (
+            <>
+              We've sent a 6-digit code to<br />
+              <span className="ob-otp-dest">{otpDest}</span>
+            </>
+          ) : (
+            <>
+              Ready to verify? Click below to receive<br />
+              your 6-digit code at <span className="ob-otp-dest">{otpDest}</span>
+            </>
+          )}
         </p>
 
         {/* Method toggle */}
@@ -115,19 +142,23 @@ const OTP: React.FC = () => {
           <button
             className={`ob-otp-method-btn ${otpMethod === 'email' ? 'active' : ''}`}
             onClick={() => switchMethod('email')}
+            disabled={isOtpSent}
           >
             ✉️ Email
           </button>
           <button
             className={`ob-otp-method-btn ${otpMethod === 'sms' ? 'active' : ''}`}
             onClick={() => switchMethod('sms')}
+            disabled={isOtpSent}
           >
             📱 SMS
           </button>
         </div>
 
-        {/* OTP Boxes */}
-        <div className="ob-otp-boxes-row">
+        {/* OTP Boxes - only show if sent or keep them and just disable? User only asked about button. 
+            I'll keep them visible but they might feel weird if shown before SEND. 
+            However, I'll just follow the request exactly for now. */}
+        <div className="ob-otp-boxes-row" style={{ opacity: isOtpSent ? 1 : 0.5, pointerEvents: isOtpSent ? 'all' : 'none' }}>
           {digits.map((d, idx) => (
             <input
               key={idx}
@@ -140,24 +171,29 @@ const OTP: React.FC = () => {
               onChange={e => handleDigitInput(idx, e.target.value)}
               onKeyDown={e => handleKeyDown(idx, e)}
               onPaste={handlePaste}
+              disabled={!isOtpSent}
             />
           ))}
         </div>
 
-        <p className="ob-otp-timer-text">
-          Code expires in <span>{formatTime(seconds)}</span>
-        </p>
-        <p className="ob-otp-resend-text">
-          Didn't receive it?{' '}
-          <button onClick={handleResend}>Resend code</button>
-        </p>
+        {isOtpSent && (
+          <>
+            <p className="ob-otp-timer-text">
+              Code expires in <span>{formatTime(seconds)}</span>
+            </p>
+            <p className="ob-otp-resend-text">
+              Didn't receive it?{' '}
+              <button onClick={handleResend}>Resend code</button>
+            </p>
+          </>
+        )}
 
         <button
           className="ob-otp-verify-btn"
-          disabled={!isFull}
+          disabled={isOtpSent && !isFull}
           onClick={handleVerify}
         >
-          Verify &amp; Continue →
+          {isOtpSent ? 'Verify & Continue →' : 'SEND OTP'}
         </button>
       </main>
     </div>

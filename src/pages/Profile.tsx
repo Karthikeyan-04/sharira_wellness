@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppStore } from '@/store/useAppStore';
 
 const ProfileStat = ({ label, value }: { label: string; value: string }) => (
-  <div className="bg-white p-6 rounded-3xl border border-gray-100 flex flex-col items-center text-center">
-    <span className="text-2xl font-display text-forest-dark font-bold">{value}</span>
-    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{label}</span>
+  <div className="bg-white p-6 rounded-3xl border border-gray-100 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+    <span className="text-3xl font-display text-forest-dark font-bold tracking-tight">{value}</span>
+    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mt-2">{label}</span>
   </div>
 );
 
@@ -89,7 +89,7 @@ const Profile: React.FC = () => {
           <div className="space-y-3">
             <ProfileLink icon={Heart} title="Saved Vendors" to="/saved-vendors" />
             <ProfileLink icon={History} title="Booking History" to="/bookings" />
-            <ProfileLink icon={Star} title="My Reviews" to="/profile" />
+            <ProfileLink icon={Star} title="My Reviews" to="/my-reviews" />
             <ProfileLink icon={Bell} title="Notifications" to="/notifications" badge="3" />
           </div>
         </div>

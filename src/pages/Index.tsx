@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Bell, Star, ArrowRight, Gift, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SessionDetailPopup from '../components/SessionDetailPopup';
@@ -13,17 +13,17 @@ const CategoryCard = ({ emoji, label, to }: { emoji: string; label: string; to: 
 );
 
 const WellnessCard = ({ title, sub, rating, image }: { title: string; sub: string; rating: string; image?: string }) => (
-  <Link to="/vendor-profile" className="min-w-[240px] bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow shrink-0">
+  <Link to="/vendor-profile" className="w-[240px] sm:w-[300px] bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow shrink-0 snap-start border border-gray-50">
     <div className="h-32 bg-gray-200 relative">
-      <img 
-        src={image || `https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`} 
-        alt={title} 
-        className="w-full h-full object-cover" 
-        loading="lazy" 
+      <img
+        src={image || `https://placehold.co/600x400/1c451c/FFFFFF?text=${title}`}
+        alt={title}
+        className="w-full h-full object-cover"
+        loading="lazy"
       />
       <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1">
         <Star className="w-3 h-3 text-gold fill-gold" />
-        <span className="text-xs font-bold">{rating}</span>
+        <span className="text-xs font-bold text-forest-dark">{rating}</span>
       </div>
     </div>
     <div className="p-4">
@@ -33,9 +33,94 @@ const WellnessCard = ({ title, sub, rating, image }: { title: string; sub: strin
   </Link>
 );
 
+const AdsBanner = () => {
+  const ads = [
+    {
+      title: "First Booking 20% Off",
+      subtitle: "Experience the sanctuary for the first time with an exclusive reward.",
+      code: "SANCTUARY20",
+      gradient: "from-forest-dark to-forest"
+    },
+    {
+      title: "Ayurvedic Detox Retreat",
+      subtitle: "Rejuvenate your body and mind with our curated 5-day detox programs.",
+      code: "DETOX15",
+      gradient: "from-forest to-forest-dark"
+    },
+    {
+      title: "Morning Flow Yoga",
+      subtitle: "Join our sunrise sessions and start your day with perfect balance.",
+      code: "YOGA10",
+      gradient: "from-forest to-forest-dark"
+    },
+    {
+      title: "Prana Healing Session",
+      subtitle: "Exclusive energy healing sessions now available at select centers.",
+      code: "HEAL500",
+      gradient: "from-forest to-forest-dark"
+    },
+    {
+      title: "Gift Wellness",
+      subtitle: "The perfect gift for your loved ones. Purchase a Sharira gift card today.",
+      code: "GIFTJOY",
+      gradient: "from-forest to-forest-dark"
+    }
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % ads.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [ads.length]);
+
+  return (
+    <div className="relative overflow-hidden rounded-[32px] group shadow-xl">
+      <div
+        className="flex transition-transform duration-700 ease-out"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {ads.map((ad, index) => (
+          <div
+            key={index}
+            className={`relative min-w-full rounded-[32px] overflow-hidden bg-gradient-to-r ${ad.gradient} p-6 sm:p-10 text-white h-[180px] sm:h-[220px] flex flex-col justify-center`}
+          >
+            <div className="relative z-10 max-w-xl">
+              <h3 className="font-display text-2xl sm:text-4xl mb-2 animate-in fade-in slide-in-from-bottom-4 duration-700">{ad.title}</h3>
+              <p className="text-xs sm:text-base text-white/80 font-light leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-700 delay-100">
+                {ad.subtitle} Use code <span className="text-gold font-bold">{ad.code}</span>
+              </p>
+            </div>
+
+            {/* Background Accent */}
+            <div className="absolute right-0 top-0 h-full w-1/3 opacity-20 hidden md:block">
+              <div className="h-full w-full bg-[radial-gradient(circle_at_center,_var(--color-gold)_0%,_transparent_70%)]" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Navigation Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {ads.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? 'bg-gold w-6' : 'bg-white/40'
+              }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
 const Index: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  
+
   const nextSession = {
     title: "Kottakal Ayurveda",
     service: "Abhyanga & Panchakarma",
@@ -48,9 +133,9 @@ const Index: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto pb-4">
-      <SessionDetailPopup 
-        isOpen={isPopupOpen} 
-        onClose={() => setIsPopupOpen(false)} 
+      <SessionDetailPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
         session={nextSession}
       />
       {/* Header */}
@@ -61,8 +146,8 @@ const Index: React.FC = () => {
               <MapPin className="w-3.5 h-3.5" />
               <span>Chennai, Tamil Nadu</span>
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl text-white">
-              Good morning, Priya <span role="img" aria-label="wave" className="inline-block transform origin-bottom-right hover:rotate-12 transition-transform"></span>
+            <h2 className="font-display text-3xl sm:text-4xl text-white leading-tight">
+              Good morning, Priya <span role="img" aria-label="wave" className="inline-block transform origin-bottom-right hover:rotate-12 transition-transform">👋</span>
             </h2>
           </div>
 
@@ -84,7 +169,7 @@ const Index: React.FC = () => {
           </div>
           <input
             type="text"
-            className="block w-full bg-white/10 border border-white/10 rounded-2xl py-3.5 pl-12 pr-12 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent text-sm sm:text-base backdrop-blur-sm"
+            className="block w-full bg-white/10 border border-white/10 rounded-2xl py-3.5 pl-12 pr-12 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent text-base backdrop-blur-sm"
             placeholder="Search treatments, spas, or doctors..."
           />
           <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
@@ -97,20 +182,24 @@ const Index: React.FC = () => {
 
       {/* Main Content Wrapper */}
       <div className="p-4 sm:p-6 lg:p-10 space-y-8 sm:space-y-12">
-        {/* Featured Banner */}
-        <section className="relative rounded-[32px] overflow-hidden bg-gradient-to-r from-forest-dark to-forest p-8 sm:p-12 text-white">
-          <div className="relative z-10 max-w-md">
-            <h3 className="font-display text-3xl sm:text-5xl mb-4">First Booking 20% Off</h3>
-            <p className="text-sm sm:text-lg text-white/80 mb-8 font-light leading-relaxed">
-              Experience the sanctuary for the first time with an exclusive reward. Use code <span className="text-gold font-bold">SANCTUARY20</span>
-            </p>
-            <Link to="/explore" className="inline-flex bg-gold hover:bg-gold/90 text-forest-dark px-8 py-4 rounded-xl font-bold transition-all items-center gap-2 group">
-              Explore Now
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+        {/* Auto-scrolling Ads Banner */}
+        <AdsBanner />
+
+        <p className="text-lg sm:text-lg text-black/80 mb-8 font-medium leading-relaxed">
+          "Based on your <span className="text-sage font-bold">Dosha quiz</span> we have suggested the following centers for you"
+        </p>
+
+        {/* Dosha Quiz */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h4 className="text-xl sm:text-2xl font-display text-forest-dark">Wellness Centers For You</h4>
+            <Link to="/explore" className="text-sage text-sm font-semibold hover:underline">View All</Link>
           </div>
-          <div className="absolute right-0 top-0 h-full w-1/3 opacity-20 hidden md:block">
-            <div className="h-full w-full bg-[radial-gradient(circle_at_center,_var(--color-gold)_0%,_transparent_70%)]" />
+          <div className="flex gap-5 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+            <WellnessCard title="Kottakal Ayurveda" sub="Abhyanga & Panchakarma" rating="4.9" image="/images/centers/Kottakal-Ayurveda.png" />
+            <WellnessCard title="Serenity Spa" sub="Deep Tissue Massage" rating="4.8" image="/images/centers/Serenity-Spa.png" />
+            <WellnessCard title="ZenYoga Studio" sub="Morning Flow & Hatha" rating="4.9" image="/images/centers/ZenYoga-Studio.png" />
+            <WellnessCard title="Prana Wellness" sub="Holistic Detox" rating="4.7" image="/images/centers/Prana-Wellness.png" />
           </div>
         </section>
 
@@ -137,7 +226,7 @@ const Index: React.FC = () => {
             <h4 className="text-xl sm:text-2xl font-display text-forest-dark">🌟 Top Rated Near You</h4>
             <Link to="/explore" className="text-sage text-sm font-semibold hover:underline">View All</Link>
           </div>
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x">
+          <div className="flex gap-5 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
             <WellnessCard title="Kottakal Ayurveda" sub="Abhyanga & Panchakarma" rating="4.9" image="/images/centers/Kottakal-Ayurveda.png" />
             <WellnessCard title="Serenity Spa" sub="Deep Tissue Massage" rating="4.8" image="/images/centers/Serenity-Spa.png" />
             <WellnessCard title="ZenYoga Studio" sub="Morning Flow & Hatha" rating="4.9" image="/images/centers/ZenYoga-Studio.png" />
@@ -153,7 +242,7 @@ const Index: React.FC = () => {
               <h5 className="font-display text-2xl mb-1">{nextSession.title}</h5>
               <p className="text-sm text-white/80 font-light">{nextSession.date}, {nextSession.time}</p>
             </Link>
-            <div 
+            <div
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -171,8 +260,8 @@ const Index: React.FC = () => {
                 <Gift className="w-6 h-6 text-gold" />
               </div>
               <div>
-                <p className="text-white/80 text-xs font-bold mb-1">Loyalty Program</p>
-                <h5 className="font-display text-xl leading-tight">You're in the top 5% in Chennai!</h5>
+                <p className="text-white/80 text-[10px] font-bold uppercase tracking-wider mb-1">Loyalty Program</p>
+                <h5 className="font-display text-2xl leading-tight">You're in the top 5% in Chennai!</h5>
               </div>
             </div>
             <button className="text-xs underline font-bold uppercase tracking-wider">Rewards</button>

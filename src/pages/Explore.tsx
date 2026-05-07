@@ -1,10 +1,13 @@
-import React from 'react';
-import { Search } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, Filter, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeader from '@/components/PageHeader';
 import VendorCard from '@/components/VendorCard';
 
 const Explore: React.FC = () => {
+  const [filter, setFilter] = useState('All');
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const vendors = [
     {
       id: 'v1',
@@ -68,12 +71,62 @@ const Explore: React.FC = () => {
     },
   ];
 
+  const filteredVendors = filter === 'All' 
+    ? vendors 
+    : vendors.filter(v => v.category === filter);
+
+  const categories = ['All', 'Ayurveda', 'Yoga', 'Massage', 'Healing', 'Wellness'];
+
+  const headerActions = (
+    <div className="flex items-center gap-2 relative">
+      <div className="relative">
+        <button
+          onClick={() => setIsFilterOpen(!isFilterOpen)}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-all backdrop-blur-sm ${
+            isFilterOpen
+              ? 'bg-white text-forest-dark border-white'
+              : 'bg-white/10 text-white border-white/10 hover:bg-white/20'
+          }`}
+        >
+          <Filter className="w-4 h-4" />
+          {filter === 'All' ? 'Filter' : filter}
+        </button>
+
+        {isFilterOpen && (
+          <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="px-4 py-2 border-b border-gray-50 flex items-center justify-between">
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Filter by</span>
+              <button onClick={() => setIsFilterOpen(false)}>
+                <X className="w-3 h-3 text-gray-400" />
+              </button>
+            </div>
+            {categories.map((c) => (
+              <button
+                key={c}
+                onClick={() => {
+                  setFilter(c);
+                  setIsFilterOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2 text-sm hover:bg-sage/5 transition-colors ${
+                  filter === c ? 'text-sage font-bold' : 'text-gray-600'
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <div className="space-y-8 pb-20">
       <PageHeader 
         title="Explore Wellness" 
         subtitle="Discover centers near you"
         backTo="/"
+        rightAction={headerActions}
       />
       
       <div className="p-4 sm:p-6 lg:p-10 max-w-7xl mx-auto space-y-8">
@@ -95,17 +148,35 @@ const Explore: React.FC = () => {
 
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-gray-500 font-medium">Showing {vendors.length} results in Chennai</p>
+          <p className="text-gray-500 font-medium">Showing {filteredVendors.length} results in Chennai</p>
         </div>
         <Link to="/categories" className="text-sage font-bold hover:underline">Browse Categories</Link>
       </div>
 
       {/* Results Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {vendors.map((vendor) => (
-          <VendorCard key={vendor.id} {...vendor} />
-        ))}
-      </div>
+      {filteredVendors.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredVendors.map((vendor) => (
+            <VendorCard key={vendor.id} {...vendor} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center py-20 space-y-4 bg-cream/20 rounded-[40px] border border-dashed border-sage/20">
+          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-sage/30">
+            <Filter className="w-8 h-8" />
+          </div>
+          <div className="text-center">
+            <p className="text-forest-dark font-display text-xl">No centers found</p>
+            <p className="text-gray-500">Try adjusting your filters or search terms</p>
+          </div>
+          <button
+            onClick={() => setFilter('All')}
+            className="px-6 py-2 bg-sage text-white rounded-xl font-bold hover:bg-sage/90 transition-colors shadow-sm"
+          >
+            Clear Filters
+          </button>
+        </div>
+      )}
       </div>
     </div>
   );

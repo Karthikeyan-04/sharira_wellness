@@ -16,10 +16,9 @@ const BookingCard = ({ title, service, date, time, price, status, isPast, onView
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{service}</p>
         </div>
       </div>
-      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest ${
-        status === 'Confirmed' ? 'bg-sage/10 text-sage' : 
+      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest ${status === 'Confirmed' ? 'bg-sage/10 text-sage' :
         status === 'Upcoming' ? 'bg-gold/10 text-forest-dark' : 'bg-gray-100 text-gray-500'
-      }`}>
+        }`}>
         {status}
       </span>
     </div>
@@ -50,7 +49,7 @@ const BookingCard = ({ title, service, date, time, price, status, isPast, onView
           <ChevronRight className="w-3 h-3" />
         </button>
       )}
-      <button 
+      <button
         onClick={onViewDetails}
         className="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-forest transition-colors"
       >
@@ -62,128 +61,168 @@ const BookingCard = ({ title, service, date, time, price, status, isPast, onView
 
 const MyBookings: React.FC = () => {
   const [selectedSession, setSelectedSession] = useState<any>(null);
-  
+
+
+  const [filter, setFilter] = useState('All');
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const allBookings = [
+    {
+      title: "Kottakal Ayurveda",
+      service: "Panchakarma",
+      date: "Thu, Mar 5",
+      time: "09:00 AM",
+      price: "2,500",
+      status: "Confirmed",
+      isPast: false
+    },
+    {
+      title: "Serenity Spa",
+      service: "Deep Tissue Ritual",
+      date: "Sat, Mar 8",
+      time: "11:00 AM",
+      price: "1,500",
+      status: "Upcoming",
+      isPast: false
+    },
+    {
+      title: "ZenYoga Sanctuary",
+      service: "Hatha Flow Session",
+      date: "Wed, Mar 1",
+      time: "07:00 AM",
+      price: "600",
+      status: "Completed",
+      isPast: true
+    },
+    {
+      title: "Glow Aesthetics",
+      service: "HydraFacial Treatment",
+      date: "Feb 20",
+      time: "02:00 PM",
+      price: "2,500",
+      status: "Completed",
+      isPast: true
+    }
+  ];
+
+  const filteredBookings = filter === 'All'
+    ? allBookings
+    : allBookings.filter(b => b.status === filter);
+
+  const upcomingBookings = filteredBookings.filter(b => !b.isPast);
+  const pastBookings = filteredBookings.filter(b => b.isPast);
+
   const handleViewDetails = (booking: any) => {
     setSelectedSession(booking);
   };
 
   const headerActions = (
-    <div className="flex items-center gap-2">
-       <button className="flex items-center gap-2 px-4 py-2 bg-white/10 text-white rounded-xl border border-white/10 text-xs font-bold hover:bg-white/20 transition-all backdrop-blur-sm">
-         <Filter className="w-4 h-4" />
-         Filter
-       </button>
-       <button className="w-10 h-10 bg-white/10 text-white rounded-xl flex items-center justify-center border border-white/10 hover:bg-white/20 transition-all backdrop-blur-sm">
-         <Calendar className="w-5 h-5" />
-       </button>
+    <div className="flex items-center gap-2 relative">
+      <div className="relative">
+        <button
+          onClick={() => setIsFilterOpen(!isFilterOpen)}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-all backdrop-blur-sm ${isFilterOpen
+            ? 'bg-white text-forest-dark border-white'
+            : 'bg-white/10 text-white border-white/10 hover:bg-white/20'
+            }`}
+        >
+          <Filter className="w-4 h-4" />
+          {filter === 'All' ? 'Filter' : filter}
+        </button>
+
+        {isFilterOpen && (
+          <div className="absolute right-0 mt-2 w-40 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            {['All', 'Confirmed', 'Upcoming', 'Completed'].map((f) => (
+              <button
+                key={f}
+                onClick={() => {
+                  setFilter(f);
+                  setIsFilterOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2 text-sm hover:bg-sage/5 transition-colors ${filter === f ? 'text-sage font-bold' : 'text-gray-600'
+                  }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 
+
   return (
     <div className="pb-10">
-      <SessionDetailPopup 
-        isOpen={!!selectedSession} 
-        onClose={() => setSelectedSession(null)} 
+      <SessionDetailPopup
+        isOpen={!!selectedSession}
+        onClose={() => setSelectedSession(null)}
         session={selectedSession}
       />
-      <PageHeader 
-        title="My Bookings" 
-        subtitle="Manage your wellness ritual schedule"
+      <PageHeader
+        title="My Bookings"
+        subtitle={<span>Manage your <br /> wellness ritual schedule</span>}
         backTo="/"
         rightAction={headerActions}
       />
-      
+
       <div className="p-4 sm:p-6 lg:p-10 max-w-4xl mx-auto space-y-10">
         {/* Upcoming Section */}
-        <section className="space-y-6">
-          <div className="flex items-center gap-2 px-2">
-             <TrendingUp className="w-4 h-4 text-sage" />
-             <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 text-sage">Active Pursuits</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <BookingCard 
-              title="Kottakal Ayurveda" 
-              service="Panchakarma" 
-              date="Thu, Mar 5" 
-              time="09:00 AM" 
-              price="2,500" 
-              status="Confirmed" 
-              onViewDetails={() => handleViewDetails({
-                  title: "Kottakal Ayurveda",
-                  service: "Panchakarma",
-                  date: "Thu, Mar 5",
-                  time: "09:00 AM",
-                  price: "2,500",
-                  status: "Confirmed"
-              })}
-            />
-            <BookingCard 
-              title="Serenity Spa" 
-              service="Deep Tissue Ritual" 
-              date="Sat, Mar 8" 
-              time="11:00 AM" 
-              price="1,500" 
-              status="Upcoming" 
-              onViewDetails={() => handleViewDetails({
-                  title: "Serenity Spa",
-                  service: "Deep Tissue Ritual",
-                  date: "Sat, Mar 8",
-                  time: "11:00 AM",
-                  price: "1,500",
-                  status: "Upcoming"
-              })}
-            />
-          </div>
-        </section>
+        {upcomingBookings.length > 0 && (
+          <section className="space-y-6">
+            <div className="flex items-center gap-2 px-2">
+              <TrendingUp className="w-4 h-4 text-sage" />
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 text-sage">Active Pursuits</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {upcomingBookings.map((booking, idx) => (
+                <BookingCard
+                  key={idx}
+                  {...booking}
+                  onViewDetails={() => handleViewDetails(booking)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
-        {/* Past Experiences */}
-        <section className="space-y-6 pt-6">
-          <div className="flex items-center gap-2 px-2">
-             <History className="w-4 h-4 text-gray-400" />
-             <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Past Experiences</h3>
+        {pastBookings.length > 0 && (
+          <section className="space-y-6 pt-6">
+            <div className="flex items-center gap-2 px-2">
+              <History className="w-4 h-4 text-gray-400" />
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Past Experiences</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {pastBookings.map((booking, idx) => (
+                <BookingCard
+                  key={idx}
+                  {...booking}
+                  onViewDetails={() => handleViewDetails(booking)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {filteredBookings.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-20 space-y-4">
+            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
+              <Filter className="w-8 h-8" />
+            </div>
+            <p className="text-gray-400 font-medium">No bookings found matching "{filter}"</p>
+            <button
+              onClick={() => setFilter('All')}
+              className="text-sage font-bold hover:underline"
+            >
+              Clear all filters
+            </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <BookingCard 
-              title="ZenYoga Sanctuary" 
-              service="Hatha Flow Session" 
-              date="Wed, Mar 1" 
-              time="07:00 AM" 
-              price="600" 
-              status="Completed" 
-              isPast={true}
-              onViewDetails={() => handleViewDetails({
-                  title: "ZenYoga Sanctuary",
-                  service: "Hatha Flow Session",
-                  date: "Wed, Mar 1",
-                  time: "07:00 AM",
-                  price: "600",
-                  status: "Completed"
-              })}
-            />
-            <BookingCard 
-              title="Glow Aesthetics" 
-              service="HydraFacial Treatment" 
-              date="Feb 20" 
-              time="02:00 PM" 
-              price="2,500" 
-              status="Completed" 
-              isPast={true}
-              onViewDetails={() => handleViewDetails({
-                  title: "Glow Aesthetics",
-                  service: "HydraFacial Treatment",
-                  date: "Feb 20",
-                  time: "02:00 PM",
-                  price: "2,500",
-                  status: "Completed"
-              })}
-            />
-          </div>
-        </section>
+        )}
 
         {/* Empty State / Help Notice */}
         <div className="bg-cream/50 p-8 rounded-[40px] border border-sage/10 flex flex-col items-center text-center space-y-4">
           <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-sage">
-             <AlertCircle className="w-6 h-6" />
+            <AlertCircle className="w-6 h-6" />
           </div>
           <p className="text-sm text-gray-600 font-light leading-relaxed max-w-sm">
             Need to reschedule? Remember to modify your booking at least 24 hours in advance to avoid session credits loss.

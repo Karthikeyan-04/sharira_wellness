@@ -2,15 +2,18 @@ import React from 'react';
 import { ArrowLeft, Share2, Heart, Clock, ShieldCheck, Info, Check, ArrowRight, Store } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const SimilarExperienceCard = ({ title, price, duration }: any) => (
+const SimilarExperienceCard = ({ title, price, duration, image }: any) => (
   <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 hover:border-sage/20 transition-all cursor-pointer group">
     <div className="flex items-center gap-4">
-      <div className="w-12 h-12 rounded-xl bg-cream flex items-center justify-center text-forest-dark group-hover:bg-forest group-hover:text-white transition-colors">
-        <Clock className="w-6 h-6" />
+      <div className="w-16 h-16 rounded-xl bg-cream flex items-center justify-center text-forest-dark overflow-hidden shrink-0">
+        <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
       <div>
         <h5 className="font-bold text-forest-dark">{title}</h5>
-        <p className="text-xs text-gray-500">{duration}</p>
+        <div className="flex items-center gap-2">
+          <Clock className="w-3 h-3 text-gray-400" />
+          <p className="text-xs text-gray-500">{duration}</p>
+        </div>
       </div>
     </div>
     <div className="text-right">
@@ -96,6 +99,21 @@ const TreatmentDetail: React.FC = () => {
             </div>
           </section>
 
+          <section>
+            <h3 className="font-display text-3xl text-forest-dark mb-6">Treatment Gallery</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+                <img src="/images/services/panchakarma.png" alt="Gallery" className="w-full h-full object-cover" />
+              </div>
+              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+                <img src="/images/services/Detox-03.png" alt="Gallery" className="w-full h-full object-cover" />
+              </div>
+              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+                <img src="/images/services/abhyanga.png" alt="Gallery" className="w-full h-full object-cover" />
+              </div>
+            </div>
+          </section>
+
           <section className="bg-cream/50 p-6 rounded-2xl border border-sage/10 flex gap-4 items-start">
             <Info className="w-6 h-6 text-sage mt-1 shrink-0" />
             <div>
@@ -112,9 +130,24 @@ const TreatmentDetail: React.FC = () => {
               <button className="text-sage text-sm font-bold hover:underline">View All</button>
             </div>
             <div className="space-y-4">
-              <SimilarExperienceCard title="Abhyanga Oil Ritual" price="1,800" duration="60 min" />
-              <SimilarExperienceCard title="Shirodhara Flow" price="3,200" duration="45 min" />
-              <SimilarExperienceCard title="Potli Herbal Press" price="2,100" duration="75 min" />
+              <SimilarExperienceCard 
+                title="Abhyanga Oil Ritual" 
+                price="1,800" 
+                duration="60 min" 
+                image="/images/services/abhyanga.png"
+              />
+              <SimilarExperienceCard 
+                title="Shirodhara Flow" 
+                price="3,200" 
+                duration="45 min" 
+                image="/images/services/shirodhara.png"
+              />
+              <SimilarExperienceCard 
+                title="Potli Herbal Press" 
+                price="2,100" 
+                duration="75 min" 
+                image="/images/services/Detox-03.png"
+              />
             </div>
           </section>
         </div>

@@ -27,12 +27,15 @@ const HelpSupport = lazy(() => import('@/pages/HelpSupport'));
 const NotificationsPage = lazy(() => import('@/pages/Notifications'));
 const Settings = lazy(() => import('@/pages/Settings'));
 const SavedVendors = lazy(() => import('@/pages/SavedVendors'));
+const MyReviews = lazy(() => import('@/pages/MyReviews'));
 const PersonalInfo = lazy(() => import('@/pages/PersonalInfo'));
 const Payments = lazy(() => import('@/pages/Payments'));
 const PasswordSettings = lazy(() => import('@/pages/PasswordSettings'));
 const Login = lazy(() => import('@/pages/onboarding/Login'));
 const OTP = lazy(() => import('@/pages/onboarding/OTP'));
+const ForgotPassword = lazy(() => import('@/pages/onboarding/ForgotPassword'));
 const OnboardingFlow = lazy(() => import('@/pages/onboarding/OnboardingFlow'));
+const ResetPassword = lazy(() => import('@/pages/onboarding/ResetPassword'));
 
 const PageLoader = () => (
   <div className="min-h-screen bg-cream flex items-center justify-center">
@@ -49,6 +52,8 @@ function App() {
           {/* Onboarding Flow (Full screen) */}
           <Route path="/onboarding/login" element={<Login />} />
           <Route path="/onboarding/otp" element={<OTP />} />
+          <Route path="/onboarding/forgot-password" element={<ForgotPassword />} />
+          <Route path="/onboarding/reset-password" element={<ResetPassword />} />
           <Route path="/onboarding/flow" element={<OnboardingFlow />} />
           
           {/* Main App Dashboard (at root for link compatibility) */}
@@ -79,6 +84,7 @@ function App() {
             <Route path="wellness-rewards" element={<WellnessRewards />} />
             <Route path="consent-management" element={<ConsentManagement />} />
             <Route path="saved-vendors" element={<SavedVendors />} />
+            <Route path="my-reviews" element={<MyReviews />} />
             <Route path="personal-info" element={<PersonalInfo />} />
             <Route path="settings" element={<Settings />} />
             <Route path="payments" element={<Payments />} />

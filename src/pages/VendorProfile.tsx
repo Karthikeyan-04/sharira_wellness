@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowLeft, Star, Users, Briefcase, ChevronRight, MapPin, Share2, Heart, ShieldCheck, Clock, Check } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const TreatmentCard = ({ title, description, price, tag, image }: any) => (
   <Link to="/treatment-detail" className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group flex flex-col sm:flex-row items-center gap-6">
@@ -25,6 +25,8 @@ const TreatmentCard = ({ title, description, price, tag, image }: any) => (
 );
 
 const VendorProfile: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="pb-20">
       {/* Hero Section */}
@@ -130,7 +132,6 @@ const VendorProfile: React.FC = () => {
           <section>
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-display text-3xl text-forest-dark">Atmosphere</h3>
-              <button className="text-sage font-bold text-sm hover:underline">View Gallery</button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
@@ -191,7 +192,10 @@ const VendorProfile: React.FC = () => {
                 </div>
               ))}
             </div>
-            <button className="w-full bg-forest-dark text-white py-4 rounded-2xl font-bold hover:bg-forest transition-all shadow-md mt-4">
+            <button 
+              onClick={() => navigate('/chat')}
+              className="w-full bg-forest-dark text-white py-4 rounded-2xl font-bold hover:bg-forest transition-all shadow-md mt-4"
+            >
               Ask a Question
             </button>
           </div>
