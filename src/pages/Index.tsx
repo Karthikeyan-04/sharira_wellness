@@ -146,8 +146,8 @@ const Index: React.FC = () => {
               <MapPin className="w-3.5 h-3.5" />
               <span>Chennai, Tamil Nadu</span>
             </div>
-            <h2 className="font-display text-3xl sm:text-4xl text-white leading-tight">
-              Good morning, Priya <span role="img" aria-label="wave" className="inline-block transform origin-bottom-right hover:rotate-12 transition-transform">👋</span>
+            <h2 className="font-display text-2xl sm:text-4xl text-white leading-tight">
+              Good morning, Priya!
             </h2>
           </div>
 
@@ -185,24 +185,6 @@ const Index: React.FC = () => {
         {/* Auto-scrolling Ads Banner */}
         <AdsBanner />
 
-        <p className="text-lg sm:text-lg text-black/80 mb-8 font-medium leading-relaxed">
-          "Based on your <span className="text-sage font-bold">Dosha quiz</span> we have suggested the following centers for you"
-        </p>
-
-        {/* Dosha Quiz */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <h4 className="text-xl sm:text-2xl font-display text-forest-dark">Wellness Centers For You</h4>
-            <Link to="/explore" className="text-sage text-sm font-semibold hover:underline">View All</Link>
-          </div>
-          <div className="flex gap-5 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
-            <WellnessCard title="Kottakal Ayurveda" sub="Abhyanga & Panchakarma" rating="4.9" image="/images/centers/Kottakal-Ayurveda.png" />
-            <WellnessCard title="Serenity Spa" sub="Deep Tissue Massage" rating="4.8" image="/images/centers/Serenity-Spa.png" />
-            <WellnessCard title="ZenYoga Studio" sub="Morning Flow & Hatha" rating="4.9" image="/images/centers/ZenYoga-Studio.png" />
-            <WellnessCard title="Prana Wellness" sub="Holistic Detox" rating="4.7" image="/images/centers/Prana-Wellness.png" />
-          </div>
-        </section>
-
         {/* Categories */}
         <section>
           <div className="flex items-center justify-between mb-6">
@@ -224,6 +206,24 @@ const Index: React.FC = () => {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h4 className="text-xl sm:text-2xl font-display text-forest-dark">🌟 Top Rated Near You</h4>
+            <Link to="/explore" className="text-sage text-sm font-semibold hover:underline">View All</Link>
+          </div>
+          <div className="flex gap-5 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+            <WellnessCard title="Kottakal Ayurveda" sub="Abhyanga & Panchakarma" rating="4.9" image="/images/centers/Kottakal-Ayurveda.png" />
+            <WellnessCard title="Serenity Spa" sub="Deep Tissue Massage" rating="4.8" image="/images/centers/Serenity-Spa.png" />
+            <WellnessCard title="ZenYoga Studio" sub="Morning Flow & Hatha" rating="4.9" image="/images/centers/ZenYoga-Studio.png" />
+            <WellnessCard title="Prana Wellness" sub="Holistic Detox" rating="4.7" image="/images/centers/Prana-Wellness.png" />
+          </div>
+        </section>
+
+        <p className="text-lg sm:text-lg text-black/80 mb-8 font-medium leading-relaxed">
+          "Based on your <span className="text-sage font-bold">Dosha quiz</span> we have suggested the following centers for you"
+        </p>
+
+        {/* Dosha Quiz */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h4 className="text-xl sm:text-2xl font-display text-forest-dark">Wellness Centers For You</h4>
             <Link to="/explore" className="text-sage text-sm font-semibold hover:underline">View All</Link>
           </div>
           <div className="flex gap-5 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
