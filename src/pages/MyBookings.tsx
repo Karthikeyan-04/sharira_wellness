@@ -28,7 +28,7 @@ const BookingCard = ({ title, service, date, time, price, status, isPast, onView
         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Date & Time</p>
         <div className="flex items-center gap-2 text-sm font-medium text-forest-dark">
           <Clock className="w-3.5 h-3.5" />
-          <span>{date} | {time}</span>
+          <span className="whitespace-nowrap">{date} | {time}</span>
         </div>
       </div>
       <div className="space-y-1 text-right">

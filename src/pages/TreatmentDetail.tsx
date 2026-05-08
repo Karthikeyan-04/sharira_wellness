@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, Share2, Heart, Clock, ShieldCheck, Info, Check, ArrowRight, Store } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ImagePopup from '../components/ImagePopup';
 
 const SimilarExperienceCard = ({ title, price, duration, image }: any) => (
   <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 hover:border-sage/20 transition-all cursor-pointer group">
@@ -24,8 +25,16 @@ const SimilarExperienceCard = ({ title, price, duration, image }: any) => (
 );
 
 const TreatmentDetail: React.FC = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
     <div className="pb-24 lg:pb-10">
+      {selectedImage && (
+        <ImagePopup 
+          imageUrl={selectedImage} 
+          onClose={() => setSelectedImage(null)} 
+        />
+      )}
       {/* Hero Header */}
       <div className="h-[40vh] sm:h-[50vh] relative min-h-[300px]">
         <img 
@@ -102,13 +111,22 @@ const TreatmentDetail: React.FC = () => {
           <section>
             <h3 className="font-display text-3xl text-forest-dark mb-6">Treatment Gallery</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+              <div 
+                className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm cursor-zoom-in hover:scale-[1.02] transition-transform"
+                onClick={() => setSelectedImage("/images/services/panchakarma.png")}
+              >
                 <img src="/images/services/panchakarma.png" alt="Gallery" className="w-full h-full object-cover" />
               </div>
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+              <div 
+                className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm cursor-zoom-in hover:scale-[1.02] transition-transform"
+                onClick={() => setSelectedImage("/images/services/Detox-03.png")}
+              >
                 <img src="/images/services/Detox-03.png" alt="Gallery" className="w-full h-full object-cover" />
               </div>
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+              <div 
+                className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm cursor-zoom-in hover:scale-[1.02] transition-transform"
+                onClick={() => setSelectedImage("/images/services/abhyanga.png")}
+              >
                 <img src="/images/services/abhyanga.png" alt="Gallery" className="w-full h-full object-cover" />
               </div>
             </div>

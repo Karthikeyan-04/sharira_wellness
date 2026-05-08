@@ -79,7 +79,7 @@ const Login: React.FC = () => {
         {/* Sign In Form */}
         {activeTab === 'signin' && (
           <form className="ob-form signin-form" onSubmit={handleSignIn}>
-            <div className="ob-input-group" style={{ gridColumn: '1 / -1' }}>
+            <div className="ob-input-group" style={{ gridColumn: '1 / span 2', width: '100%' }}>
               <label htmlFor="email">Email / Mobile</label>
               <input
                 type="text"
@@ -92,7 +92,7 @@ const Login: React.FC = () => {
               />
             </div>
 
-            <div className="ob-input-group" style={{ gridColumn: '1 / -1' }}>
+            <div className="ob-input-group" style={{ gridColumn: '1 / span 2', width: '100%' }}>
               <label htmlFor="password">Password</label>
               <div className="ob-password-wrapper">
                 <input

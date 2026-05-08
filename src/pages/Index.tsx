@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, Star, ArrowRight, Gift, MapPin } from 'lucide-react';
+import { Search, Bell, Star, ArrowRight, Gift, MapPin, MoreHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SessionDetailPopup from '../components/SessionDetailPopup';
 
-const CategoryCard = ({ emoji, label, to }: { emoji: string; label: string; to: string }) => (
+const CategoryCard = ({ emoji, label, to }: { emoji: React.ReactNode; label: string; to: string }) => (
   <Link to={to} className="flex flex-col items-center gap-2 group cursor-pointer transition-transform hover:-translate-y-1">
     <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-[24px] sm:rounded-[32px] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
-      <span className="text-2xl sm:text-3xl filter drop-shadow-sm">{emoji}</span>
+      <div className="text-forest-dark filter drop-shadow-sm flex items-center justify-center">
+        {typeof emoji === 'string' ? (
+          <span className="text-2xl sm:text-3xl">{emoji}</span>
+        ) : (
+          emoji
+        )}
+      </div>
     </div>
     <span className="text-xs sm:text-sm font-semibold text-forest-dark capitalize tracking-wide mt-1">{label}</span>
   </Link>
@@ -198,7 +204,7 @@ const Index: React.FC = () => {
             <CategoryCard emoji="🏋️" label="Fitness" to="/ayurveda-results" />
             <CategoryCard emoji="🦷" label="Dental" to="/ayurveda-results" />
             <CategoryCard emoji="🏥" label="Medical" to="/ayurveda-results" />
-            <CategoryCard emoji="🗂️" label="More" to="/categories" />
+            <CategoryCard emoji={<MoreHorizontal className="w-8 h-8 sm:w-10 sm:h-10" />} label="More" to="/categories" />
           </div>
         </section>
 

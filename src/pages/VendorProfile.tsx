@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, Star, Users, Briefcase, ChevronRight, MapPin, Share2, Heart, ShieldCheck, Clock, Check } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import ImagePopup from '../components/ImagePopup';
 
 const TreatmentCard = ({ title, description, price, tag, image }: any) => (
   <Link to="/treatment-detail" className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group flex flex-col sm:flex-row items-center gap-6">
@@ -26,9 +27,16 @@ const TreatmentCard = ({ title, description, price, tag, image }: any) => (
 
 const VendorProfile: React.FC = () => {
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <div className="pb-20">
+      {selectedImage && (
+        <ImagePopup
+          imageUrl={selectedImage}
+          onClose={() => setSelectedImage(null)}
+        />
+      )}
       {/* Hero Section */}
       <div className="h-[35vh] relative min-h-[250px] bg-forest-dark">
         <img
@@ -52,7 +60,7 @@ const VendorProfile: React.FC = () => {
           </div>
         </div>
 
-        <div className="absolute -bottom-20 left-4 right-4 max-w-7xl mx-auto px-2 sm:px-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="absolute -bottom-24 left-4 right-4 max-w-7xl mx-auto px-2 sm:px-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="flex items-end gap-6">
             <div className="w-32 h-32 rounded-[40px] bg-white p-2 shadow-2xl shrink-0">
               <div className="w-full h-full rounded-[34px] bg-cream flex items-center justify-center overflow-hidden">
@@ -61,7 +69,7 @@ const VendorProfile: React.FC = () => {
             </div>
             <div className="pb-2 space-y-1">
               <h1 className="font-display text-4xl sm:text-5xl text-white">Kottakal Ayurveda Centre</h1>
-              <div className="flex items-center gap-2 text-black/60 text-sm">
+              <div className="flex items-center gap-2 text-white/60 text-sm">
                 <MapPin className="w-4 h-4" />
                 <span>Anna Nagar, Chennai</span>
               </div>
@@ -83,7 +91,7 @@ const VendorProfile: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-10 mt-28 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 mt-32 grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Main Info */}
         <div className="lg:col-span-2 space-y-12">
           {/* Stats Bar */}
@@ -134,13 +142,22 @@ const VendorProfile: React.FC = () => {
               <h3 className="font-display text-3xl text-forest-dark">Atmosphere</h3>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+              <div
+                className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm cursor-zoom-in hover:scale-[1.02] transition-transform"
+                onClick={() => setSelectedImage("/images/centers/kottakal-atmosphere-1.png")}
+              >
                 <img src="/images/centers/kottakal-atmosphere-1.png" alt="Gallery" className="w-full h-full object-cover" />
               </div>
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+              <div
+                className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm cursor-zoom-in hover:scale-[1.02] transition-transform"
+                onClick={() => setSelectedImage("/images/services/panchakarma.png")}
+              >
                 <img src="/images/services/panchakarma.png" alt="Gallery" className="w-full h-full object-cover" />
               </div>
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+              <div
+                className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-sm cursor-zoom-in hover:scale-[1.02] transition-transform"
+                onClick={() => setSelectedImage("/images/services/abhyanga.png")}
+              >
                 <img src="/images/services/abhyanga.png" alt="Gallery" className="w-full h-full object-cover" />
               </div>
             </div>
@@ -192,7 +209,7 @@ const VendorProfile: React.FC = () => {
                 </div>
               ))}
             </div>
-            <button 
+            <button
               onClick={() => navigate('/chat')}
               className="w-full bg-forest-dark text-white py-4 rounded-2xl font-bold hover:bg-forest transition-all shadow-md mt-4"
             >
